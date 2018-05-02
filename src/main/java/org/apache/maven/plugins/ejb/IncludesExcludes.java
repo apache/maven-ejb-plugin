@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Karl Heinz Marbaise <khmarbaise@apache.org>
+ * @author <a href="mailto:khmarbaise@apache.org">Karl Heinz Marbaise</a>
  */
 public class IncludesExcludes
 {

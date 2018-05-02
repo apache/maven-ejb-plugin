@@ -28,7 +28,7 @@ import java.io.File;
  * Think about this helper class, cause i've got the impression this can be made better.
  * </pre>
  * 
- * @author Karl Heinz Marbaise <khmarbaise@apache.org>
+ * @author <a href="mailto:khmarbaise@apache.org">Karl Heinz Marbaise</a>
  */
 public final class EjbHelper
 {
