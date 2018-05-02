@@ -30,7 +30,7 @@ under the License.
   </parent>
 
   <artifactId>maven-ejb-plugin</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.1</version>
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven EJB Plugin</name>
@@ -44,7 +44,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-ejb-plugin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-ejb-plugin.git</developerConnection>
     <url>https://github.com/apache/maven-ejb-plugin/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
+    <tag>maven-ejb-plugin-3.0.1</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
