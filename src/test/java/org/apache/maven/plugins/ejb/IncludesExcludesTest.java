@@ -79,4 +79,21 @@ public class IncludesExcludesTest
         assertThat( ie.resultingExcludes() ).isEqualTo( new String[0] );
     }
 
+    @Test
+    public void nonNullIncludesShouldResultInTheSameIncludes()
+    {
+        IncludesExcludes ie = new IncludesExcludes( Arrays.asList( "**/package.html" ), null,
+                                                    Arrays.asList( "**/site.html" ), null );
+
+        assertThat( ie.resultingIncludes() ).isEqualTo( new String[] { "**/package.html" } );
+    }
+
+    @Test
+    public void nonNullExcludesShouldResultInTheSameExcludes()
+    {
+        IncludesExcludes ie = new IncludesExcludes( null, Arrays.asList( "**/package.html" ),
+                                                    null, Arrays.asList( "**/site.html" ) );
+
+        assertThat( ie.resultingExcludes() ).isEqualTo( new String[] { "**/package.html" } );
+    }
 }
