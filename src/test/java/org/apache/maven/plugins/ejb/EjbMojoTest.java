@@ -27,7 +27,6 @@ import java.util.jar.JarFile;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
-import org.apache.maven.plugins.ejb.EjbMojo;
 import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
 import org.apache.maven.plugins.ejb.utils.JarContentChecker;
 import org.apache.maven.project.MavenProject;
