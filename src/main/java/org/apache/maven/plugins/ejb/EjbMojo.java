@@ -21,7 +21,7 @@ package org.apache.maven.plugins.ejb;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,12 +63,12 @@ public class EjbMojo
     extends AbstractMojo
 {
     private static final List<String> DEFAULT_INCLUDES_LIST =
-        Collections.unmodifiableList( new ArrayList<String>( "**/**" ) );
+        Collections.unmodifiableList( Arrays.asList( "**/**" ) );
 
     //@formatter:off
     private static final List<String> DEFAULT_CLIENT_EXCLUDES_LIST =
         Collections.unmodifiableList( 
-            new ArrayList<String>( 
+            Arrays.asList( 
               "**/*Bean.class", 
               "**/*CMP.class", 
               "**/*Session.class",
@@ -372,7 +372,7 @@ public class EjbMojo
 
         try
         {
-            List<String> defaultExcludes = new ArrayList<>( ejbJar, "**/package.html" );
+            List<String> defaultExcludes = Arrays.asList( ejbJar, "**/package.html" );
             List<String> defaultIncludes = DEFAULT_INCLUDES_LIST;
 
             IncludesExcludes ie =
@@ -394,19 +394,7 @@ public class EjbMojo
             // create archive
             archiver.createArchive( session, project, archive );
         }
-        catch ( ArchiverException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( ManifestException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( DependencyResolutionRequiredException e )
+        catch ( ArchiverException | ManifestException | IOException | DependencyResolutionRequiredException e )
         {
             throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
         }
@@ -447,22 +435,7 @@ public class EjbMojo
             clientArchiver.createArchive( session, project, archive );
 
         }
-        catch ( ArchiverException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( ManifestException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( DependencyResolutionRequiredException e )
+        catch ( ArchiverException | ManifestException | IOException | DependencyResolutionRequiredException e )
         {
             throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
                                               e );

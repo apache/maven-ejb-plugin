@@ -21,11 +21,10 @@ package org.apache.maven.plugins.ejb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.Test;
-
-import com.google.inject.internal.util.Lists;
 
 public class IncludesExcludesTest
 {
@@ -64,7 +63,7 @@ public class IncludesExcludesTest
     public void nonNullForDefaultExcludesShouldResultInExcludesWithDefaultExcludes()
     {
         IncludesExcludes ie = new IncludesExcludes( null, null, Collections.<String>emptyList(),
-                                                    Lists.newArrayList( "**/package.html" ) );
+                                                    Arrays.asList( "**/package.html" ) );
 
         assertThat( ie.resultingIncludes() ).isEqualTo( new String[0] );
         assertThat( ie.resultingExcludes() ).isEqualTo( new String[] { "**/package.html" } );
@@ -73,7 +72,7 @@ public class IncludesExcludesTest
     @Test
     public void nonNullForDefaultIncludesShouldResultInIncludesWithDefaultIncludes()
     {
-        IncludesExcludes ie = new IncludesExcludes( null, null, Lists.newArrayList( "**/package.html" ),
+        IncludesExcludes ie = new IncludesExcludes( null, null, Arrays.asList( "**/package.html" ),
                                                     Collections.<String>emptyList() );
 
         assertThat( ie.resultingIncludes() ).isEqualTo( new String[] { "**/package.html" } );
