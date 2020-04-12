@@ -514,7 +514,8 @@ public class EjbMojo
     private String getEncoding( File xmlFile )
         throws IOException
     {
-        try ( XmlStreamReader xmlReader = new XmlStreamReader( xmlFile ) ) {
+        try ( XmlStreamReader xmlReader = new XmlStreamReader( xmlFile ) )
+        {
             final String encoding = xmlReader.getEncoding();
             return encoding;
         }
