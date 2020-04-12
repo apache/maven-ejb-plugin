@@ -41,7 +41,7 @@ public class IncludesExcludesTest
     }
 
     @Test
-    public void nullForInclucesShouldResultInZeroSizeResults()
+    public void nullForIncludesShouldResultInZeroSizeResults()
     {
         IncludesExcludes ie = new IncludesExcludes( null, Collections.<String>emptyList(),
                                                     Collections.<String>emptyList(), Collections.<String>emptyList() );
@@ -51,7 +51,7 @@ public class IncludesExcludesTest
     }
 
     @Test
-    public void nullForExclucesShouldResultInZeroSizeResults()
+    public void nullForExcludesShouldResultInZeroSizeResults()
     {
         IncludesExcludes ie = new IncludesExcludes( Collections.<String>emptyList(), null,
                                                     Collections.<String>emptyList(), Collections.<String>emptyList() );
@@ -71,7 +71,7 @@ public class IncludesExcludesTest
     }
 
     @Test
-    public void nonNullForDefaultIncludesShouldResultInExcludesWithDefaultIncludes()
+    public void nonNullForDefaultIncludesShouldResultInIncludesWithDefaultIncludes()
     {
         IncludesExcludes ie = new IncludesExcludes( null, null, Lists.newArrayList( "**/package.html" ),
                                                     Collections.<String>emptyList() );
