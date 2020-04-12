@@ -21,6 +21,7 @@ package org.apache.maven.plugins.ejb;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,8 +50,6 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
 import org.codehaus.plexus.util.FileUtils;
 
-import com.google.inject.internal.util.Lists;
-
 /**
  * Build an EJB (and optional client) from the current project.
  *
@@ -64,12 +63,12 @@ public class EjbMojo
     extends AbstractMojo
 {
     private static final List<String> DEFAULT_INCLUDES_LIST =
-        Collections.unmodifiableList( Lists.newArrayList( "**/**" ) );
+        Collections.unmodifiableList( Arrays.asList( "**/**" ) );
 
     //@formatter:off
     private static final List<String> DEFAULT_CLIENT_EXCLUDES_LIST =
         Collections.unmodifiableList( 
-            Lists.newArrayList( 
+            Arrays.asList( 
               "**/*Bean.class", 
               "**/*CMP.class", 
               "**/*Session.class",
@@ -373,7 +372,7 @@ public class EjbMojo
 
         try
         {
-            List<String> defaultExcludes = Lists.newArrayList( ejbJar, "**/package.html" );
+            List<String> defaultExcludes = Arrays.asList( ejbJar, "**/package.html" );
             List<String> defaultIncludes = DEFAULT_INCLUDES_LIST;
 
             IncludesExcludes ie =
