@@ -395,19 +395,7 @@ public class EjbMojo
             // create archive
             archiver.createArchive( session, project, archive );
         }
-        catch ( ArchiverException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( ManifestException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
-        }
-        catch ( DependencyResolutionRequiredException e )
+        catch ( ArchiverException | ManifestException | IOException | DependencyResolutionRequiredException e )
         {
             throw new MojoExecutionException( "There was a problem creating the EJB archive: " + e.getMessage(), e );
         }
@@ -448,22 +436,7 @@ public class EjbMojo
             clientArchiver.createArchive( session, project, archive );
 
         }
-        catch ( ArchiverException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( ManifestException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
-                                              e );
-        }
-        catch ( DependencyResolutionRequiredException e )
+        catch ( ArchiverException | ManifestException | IOException | DependencyResolutionRequiredException e )
         {
             throw new MojoExecutionException( "There was a problem creating the EJB client archive: " + e.getMessage(),
                                               e );
