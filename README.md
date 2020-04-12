@@ -22,7 +22,7 @@ Contributing to [Apache Maven EJB Plugin](https://maven.apache.org/plugins/maven
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven.plugins/maven-ejb-plugin.svg?label=Maven%20Central)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.apache.maven.plugins%22%20AND%20a%3A%22maven-ejb-plugin%22)
 [![Jenkins Status](https://img.shields.io/jenkins/s/https/builds.apache.org/job/maven-box/job/maven-ejb-plugin/job/master.svg?style=flat-square)][build]
 [![Jenkins tests](https://img.shields.io/jenkins/t/https/builds.apache.org/job/maven-box/job/maven-ejb-plugin/job/master.svg?style=flat-square)][test-results]
-
+[![Build Status](https://travis-ci.org/apache/maven-ejb-plugin.svg?branch=master)](https://travis-ci.org/apache/maven-ejb-plugin)
 
 You have found a bug or you have an idea for a cool new feature? Contributing
 code is a great way to give something back to the open source community. Before
