@@ -46,33 +46,27 @@ public class IncludesExcludes
 
     public String[] resultingIncludes()
     {
-        String[] result = new String[0];
-        if ( includes.isEmpty() )
-        {
-            result = defaultIncludes.toArray( new String[defaultIncludes.size()] );
-        }
-        else
-        {
-            result = includes.toArray( new String[includes.size()] );
-        }
-
-        return result;
+        return resultingXcludes( includes, defaultIncludes );
     }
 
     public String[] resultingExcludes()
     {
+        return resultingXcludes( excludes, defaultExcludes );
+    }
+
+    private static String[] resultingXcludes( List<String> currentXcludes, List<String> defaultXcludes )
+    {
         String[] result = new String[0];
-        if ( excludes.isEmpty() )
+        if ( currentXcludes.isEmpty() )
         {
-            result = defaultExcludes.toArray( new String[defaultExcludes.size()] );
+            result = defaultXcludes.toArray( new String[defaultXcludes.size()] );
         }
         else
         {
-            result = excludes.toArray( new String[excludes.size()] );
+            result = currentXcludes.toArray( new String[currentXcludes.size()] );
         }
 
         return result;
-
     }
 
     private List<String> makeNonNullList( List<String> in )
