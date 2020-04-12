@@ -56,17 +56,14 @@ public class IncludesExcludes
 
     private static String[] resultingXcludes( List<String> currentXcludes, List<String> defaultXcludes )
     {
-        String[] result = new String[0];
         if ( currentXcludes.isEmpty() )
         {
-            result = defaultXcludes.toArray( new String[0] );
+            return defaultXcludes.toArray( new String[0] );
         }
         else
         {
-            result = currentXcludes.toArray( new String[0] );
+            return currentXcludes.toArray( new String[0] );
         }
-
-        return result;
     }
 
     private List<String> makeNonNullList( List<String> in )
