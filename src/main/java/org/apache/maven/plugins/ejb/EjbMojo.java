@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.XmlStreamReader;
 import org.apache.maven.archiver.MavenArchiveConfiguration;
 import org.apache.maven.archiver.MavenArchiver;
@@ -508,25 +507,16 @@ public class EjbMojo
     /**
      * Get the encoding from an XML-file.
      *
-     * @param xmlFile the XML-file
-     * @return The encoding of the XML-file, or UTF-8 if it's not specified in the file
+     * @param xmlFile the XML file
+     * @return The encoding of the XML file, or UTF-8 if it's not specified in the file
      * @throws IOException if an error occurred while reading the file
      */
     private String getEncoding( File xmlFile )
         throws IOException
     {
-        XmlStreamReader xmlReader = null;
-        try
-        {
-            xmlReader = new XmlStreamReader( xmlFile );
+        try ( XmlStreamReader xmlReader = new XmlStreamReader( xmlFile ) ) {
             final String encoding = xmlReader.getEncoding();
-            xmlReader.close();
-            xmlReader = null;
             return encoding;
-        }
-        finally
-        {
-            IOUtils.closeQuietly( xmlReader );
         }
     }
 
