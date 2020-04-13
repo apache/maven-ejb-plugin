@@ -35,19 +35,12 @@ import org.codehaus.plexus.util.FileUtils;
 /**
  * EJB plugin Test Case
  */
-
 public class EjbMojoTest
     extends AbstractMojoTestCase
 {
     static final String DEFAULT_POM_PATH = "target/test-classes/unit/ejbmojotest/plugin-config.xml";
 
     static final String DEFAULT_JAR_NAME = "testJar";
-
-    public void setUp()
-        throws Exception
-    {
-        super.setUp();
-    }
 
     /**
      * check test environment
