@@ -33,9 +33,9 @@ JarFile jar = new JarFile( jarFile );
 
 Attributes manifest = jar.getManifest().getMainAttributes();
 
-if ( !manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Apache Maven" ) )
+if ( !manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Maven EJB Plugin" ) )
 {
-    throw new IllegalStateException( "Created-By not equals Apache Maven" );
+    throw new IllegalStateException( "Created-By not equals Maven EJB Plugin" );
 }
 
 String classpath = manifest.getValue( Attributes.Name.CLASS_PATH );

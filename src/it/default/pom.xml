@@ -38,6 +38,7 @@ under the License.
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2020-05-01T12:12:12Z</project.build.outputTimestamp>
   </properties>
 
   <build>

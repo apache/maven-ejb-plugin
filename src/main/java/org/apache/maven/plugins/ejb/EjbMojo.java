@@ -55,9 +55,8 @@ import org.codehaus.plexus.util.FileUtils;
  * @author <a href="evenisse@apache.org">Emmanuel Venisse</a>
  * @version $Id$
  */
-// CHECKSTYLE_OFF: LineLength
-@Mojo( name = "ejb", requiresDependencyResolution = ResolutionScope.RUNTIME, threadSafe = true, defaultPhase = LifecyclePhase.PACKAGE )
-// CHECKSTYLE_ON: LineLength
+@Mojo( name = "ejb", requiresDependencyResolution = ResolutionScope.RUNTIME, threadSafe = true,
+                defaultPhase = LifecyclePhase.PACKAGE )
 public class EjbMojo
     extends AbstractMojo
 {
@@ -272,6 +271,16 @@ public class EjbMojo
     @Parameter( defaultValue = "${session}", readonly = true, required = true )
     private MavenSession session;
 
+    /**
+     * Timestamp for reproducible output archive entries, either formatted as ISO 8601
+     * <code>yyyy-MM-dd'T'HH:mm:ssXXX</code> or as an int representing seconds since the epoch (like
+     * <a href="https://reproducible-builds.org/docs/source-date-epoch/">SOURCE_DATE_EPOCH</a>).
+     *
+     * @since 3.1.0
+     */
+    @Parameter( defaultValue = "${project.build.outputTimestamp}" )
+    private String outputTimestamp;
+
     private static final String EJB_TYPE = "ejb";
 
     private static final String EJB_CLIENT_TYPE = "ejb-client";
@@ -363,7 +372,12 @@ public class EjbMojo
 
         archiver.setArchiver( jarArchiver );
 
+        archiver.setCreatedBy( "Maven EJB Plugin", "org.apache.maven.plugins", "maven-ejb-plugin" );
+
         archiver.setOutputFile( jarFile );
+
+        // configure for Reproducible Builds based on outputTimestamp value
+        archiver.configureReproducible( outputTimestamp );
 
         File deploymentDescriptor = new File( sourceDirectory, ejbJar );
 
@@ -418,7 +432,12 @@ public class EjbMojo
 
         clientArchiver.setArchiver( clientJarArchiver );
 
+        clientArchiver.setCreatedBy( "Maven EJB Plugin", "org.apache.maven.plugins", "maven-ejb-plugin" );
+
         clientArchiver.setOutputFile( clientJarFile );
+
+        // configure for Reproducible Builds based on outputTimestamp value
+        clientArchiver.configureReproducible( outputTimestamp );
 
         try
         {
