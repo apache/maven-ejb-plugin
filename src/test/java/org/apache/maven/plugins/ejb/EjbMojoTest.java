@@ -427,8 +427,8 @@ public class EjbMojoTest
     }
 
     /**
-     * Tests if the mojo throws an exception when the EJB version is < 3.0 and no deployment descriptor is present. The
-     * case with deployment descriptor present is covered by previous tests.
+     * Tests if the mojo throws an exception when the EJB version is &lt; 3.0 and no deployment descriptor is present.
+     * The case with deployment descriptor present is covered by previous tests.
      *
      * @throws Exception if any exception occurs
      */
