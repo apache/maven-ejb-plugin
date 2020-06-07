@@ -62,7 +62,7 @@ public class JarContentChecker
      * files with the same file name but with different data will not
      * be considered.
      *
-     * @param jarFile
+     * @param jarFile the Jar file
      * @return boolean
      */
     public boolean isOK( JarFile jarFile )
