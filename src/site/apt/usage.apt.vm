@@ -35,15 +35,15 @@ Usage
 
   * If the packaging type defined in the <<<pom.xml>>> is <<<ejb>>>, the <<<package>>> lifecycle phase can be used
 
-+--------------+
-  mvn package
-+--------------+
+--------------
+mvn package
+--------------
 
   * or using the <<<ejb:ejb>>> goal
 
-+--------------+
-  mvn ejb:ejb
-+--------------+
+--------------
+mvn ejb:ejb
+--------------
 
  []
 
