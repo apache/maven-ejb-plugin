@@ -195,7 +195,7 @@ public class EjbMojo
 
     /**
      * What EJB version should the EJB Plugin generate? Valid values are "2.x" or "3.x" (where x is a digit). When
-     * ejbVersion is "3.x", the <code>ejb-jar.xml</code> file is optional.
+     * ejbVersion is "2.x", the <code>ejb-jar.xml</code> file is mandatory.
      * <p/>
      * Usage:
      * 
