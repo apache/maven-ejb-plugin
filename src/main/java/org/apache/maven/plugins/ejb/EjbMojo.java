@@ -194,7 +194,7 @@ public class EjbMojo
     private JarArchiver jarArchiver;
 
     /**
-     * What EJB version should the EJB Plugin generate? Valid values are "2.x" or "3.x" (where x is a digit). When
+     * What EJB version should the EJB Plugin generate? Valid values are "2.x", "3.x" or "4.x" (where x is a digit). When
      * ejbVersion is "2.x", the <code>ejb-jar.xml</code> file is mandatory.
      * <p/>
      * Usage:
@@ -465,10 +465,10 @@ public class EjbMojo
     private void checkEJBVersionCompliance( File deploymentDescriptor )
         throws MojoExecutionException
     {
-        if ( !ejbVersion.matches( "\\A[2-3]\\.[0-9]\\z" ) )
+        if ( !ejbVersion.matches( "\\A[2-4]\\.[0-9]\\z" ) )
         {
             throw new MojoExecutionException( "ejbVersion is not valid: " + ejbVersion
-                + ". Must be 2.x or 3.x (where x is a digit)" );
+                + ". Must be 2.x, 3.x or 4.x (where x is a digit)" );
         }
 
         if ( ejbVersion.matches( "\\A2\\.[0-9]\\z" ) && !deploymentDescriptor.exists() )
