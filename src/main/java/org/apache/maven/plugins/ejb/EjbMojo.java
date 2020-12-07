@@ -194,8 +194,8 @@ public class EjbMojo
     private JarArchiver jarArchiver;
 
     /**
-     * What EJB version should the EJB Plugin generate? Valid values are "2.x", "3.x" or "4.x" (where x is a digit). When
-     * ejbVersion is "2.x", the <code>ejb-jar.xml</code> file is mandatory.
+     * What EJB version should the EJB Plugin generate? Valid values are "2.x", "3.x" or "4.x" (where x is a digit).
+     * When ejbVersion is "2.x", the <code>ejb-jar.xml</code> file is mandatory.
      * <p/>
      * Usage:
      * 
