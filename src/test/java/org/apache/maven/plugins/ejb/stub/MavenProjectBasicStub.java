@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Properties;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Profile;
@@ -49,7 +50,7 @@ public class MavenProjectBasicStub
 
     protected File file;
 
-    protected ArtifactStub artifact;
+    protected DefaultArtifact artifact;
 
     public MavenProjectBasicStub( String id )
         throws Exception
@@ -59,8 +60,9 @@ public class MavenProjectBasicStub
 
         model = (ModelStub) super.getModel();
         properties = new Properties();
-        artifact = new ArtifactStub();
         identifier = id;
+
+        artifact = new DefaultArtifact(getGroupId(), getArtifactId(), getVersion(), "compile", "jar", "", null);
 
         // set isolated root directory
         testRootDir = PlexusTestCase.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
@@ -69,8 +71,6 @@ public class MavenProjectBasicStub
         {
             FileUtils.mkdir( testRootDir );
         }
-
-        artifact.populate( this );
 
         // this is ugly but needed to ensure that the copy constructor
         // works correctly
