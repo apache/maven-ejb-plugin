@@ -462,7 +462,7 @@ public class EjbMojo
         return clientJarFile;
     }
 
-    private void checkEJBVersionCompliance( File deploymentDescriptor )
+    static void validateEjbVersion( String ejbVersion )
         throws MojoExecutionException
     {
         if ( !ejbVersion.matches( "\\A[2-4]\\.[0-9]\\z" ) )
@@ -470,6 +470,12 @@ public class EjbMojo
             throw new MojoExecutionException( "ejbVersion is not valid: " + ejbVersion
                 + ". Must be 2.x, 3.x or 4.x (where x is a digit)" );
         }
+    }
+
+    private void checkEJBVersionCompliance( File deploymentDescriptor )
+        throws MojoExecutionException
+    {
+        validateEjbVersion( ejbVersion );
 
         if ( ejbVersion.matches( "\\A2\\.[0-9]\\z" ) && !deploymentDescriptor.exists() )
         {
