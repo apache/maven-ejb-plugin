@@ -19,11 +19,11 @@ package org.apache.maven.plugins.ejb;
  * under the License.
  */
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class IncludesExcludesTest
@@ -35,8 +35,8 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( Collections.<String>emptyList(), Collections.<String>emptyList(),
                                                     Collections.<String>emptyList(), Collections.<String>emptyList() );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[0] );
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[0] );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[0] );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[0] );
     }
 
     @Test
@@ -45,8 +45,8 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( null, Collections.<String>emptyList(),
                                                     Collections.<String>emptyList(), Collections.<String>emptyList() );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[0] );
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[0] );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[0] );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[0] );
     }
 
     @Test
@@ -55,8 +55,8 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( Collections.<String>emptyList(), null,
                                                     Collections.<String>emptyList(), Collections.<String>emptyList() );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[0] );
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[0] );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[0] );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[0] );
     }
 
     @Test
@@ -65,8 +65,8 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( null, null, Collections.<String>emptyList(),
                                                     Arrays.asList( "**/package.html" ) );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[0] );
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[] { "**/package.html" } );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[0] );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[] { "**/package.html" } );
     }
 
     @Test
@@ -75,8 +75,8 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( null, null, Arrays.asList( "**/package.html" ),
                                                     Collections.<String>emptyList() );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[] { "**/package.html" } );
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[0] );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[] { "**/package.html" } );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[0] );
     }
 
     @Test
@@ -85,7 +85,7 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( Arrays.asList( "**/package.html" ), null,
                                                     Arrays.asList( "**/site.html" ), null );
 
-        assertThat( ie.resultingIncludes() ).isEqualTo( new String[] { "**/package.html" } );
+        Assert.assertArrayEquals( ie.resultingIncludes(), new String[] { "**/package.html" } );
     }
 
     @Test
@@ -94,6 +94,6 @@ public class IncludesExcludesTest
         IncludesExcludes ie = new IncludesExcludes( null, Arrays.asList( "**/package.html" ),
                                                     null, Arrays.asList( "**/site.html" ) );
 
-        assertThat( ie.resultingExcludes() ).isEqualTo( new String[] { "**/package.html" } );
+        Assert.assertArrayEquals( ie.resultingExcludes(), new String[] { "**/package.html" } );
     }
 }
