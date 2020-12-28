@@ -513,6 +513,36 @@ public class EjbMojoTest
         assertJarCreation( project, true, false );
     }
 
+    public void testEjb1VersionValidation()
+    {
+        try
+        {
+            EjbMojo.validateEjbVersion( "1.1" );
+            fail( "MojoException is expected" );
+        }
+        catch ( MojoExecutionException mex )
+        {
+        }
+    }
+
+    public void testEjb2VersionValidation()
+        throws MojoExecutionException
+    {
+        EjbMojo.validateEjbVersion( "2.1" );
+    }
+
+    public void testEjb3VersionValidation()
+        throws MojoExecutionException
+    {
+        EjbMojo.validateEjbVersion( "3.2" );
+    }
+
+    public void testEjb4VersionValidation()
+        throws MojoExecutionException
+    {
+        EjbMojo.validateEjbVersion( "4.0" );
+    }
+
     protected EjbMojo lookupMojo()
         throws Exception
     {
