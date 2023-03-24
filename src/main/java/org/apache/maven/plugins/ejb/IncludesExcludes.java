@@ -1,5 +1,3 @@
-package org.apache.maven.plugins.ejb;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,6 +16,7 @@ package org.apache.maven.plugins.ejb;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.plugins.ejb;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,8 +24,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:khmarbaise@apache.org">Karl Heinz Marbaise</a>
  */
-public class IncludesExcludes
-{
+public class IncludesExcludes {
     private List<String> includes;
 
     private List<String> defaultIncludes;
@@ -35,47 +33,35 @@ public class IncludesExcludes
 
     private List<String> defaultExcludes;
 
-    public IncludesExcludes( List<String> includes, List<String> excludes, List<String> defaultIncludes,
-                             List<String> defaultExcludes )
-    {
-        this.includes = makeNonNullList( includes );
-        this.excludes = makeNonNullList( excludes );
-        this.defaultIncludes = makeNonNullList( defaultIncludes );
-        this.defaultExcludes = makeNonNullList( defaultExcludes );
+    public IncludesExcludes(
+            List<String> includes, List<String> excludes, List<String> defaultIncludes, List<String> defaultExcludes) {
+        this.includes = makeNonNullList(includes);
+        this.excludes = makeNonNullList(excludes);
+        this.defaultIncludes = makeNonNullList(defaultIncludes);
+        this.defaultExcludes = makeNonNullList(defaultExcludes);
     }
 
-    public String[] resultingIncludes()
-    {
-        return resultingXcludes( includes, defaultIncludes );
+    public String[] resultingIncludes() {
+        return resultingXcludes(includes, defaultIncludes);
     }
 
-    public String[] resultingExcludes()
-    {
-        return resultingXcludes( excludes, defaultExcludes );
+    public String[] resultingExcludes() {
+        return resultingXcludes(excludes, defaultExcludes);
     }
 
-    private static String[] resultingXcludes( List<String> currentXcludes, List<String> defaultXcludes )
-    {
-        if ( currentXcludes.isEmpty() )
-        {
-            return defaultXcludes.toArray( new String[0] );
-        }
-        else
-        {
-            return currentXcludes.toArray( new String[0] );
+    private static String[] resultingXcludes(List<String> currentXcludes, List<String> defaultXcludes) {
+        if (currentXcludes.isEmpty()) {
+            return defaultXcludes.toArray(new String[0]);
+        } else {
+            return currentXcludes.toArray(new String[0]);
         }
     }
 
-    private List<String> makeNonNullList( List<String> in )
-    {
-        if ( in == null )
-        {
+    private List<String> makeNonNullList(List<String> in) {
+        if (in == null) {
             return Collections.<String>emptyList();
-        }
-        else
-        {
+        } else {
             return in;
         }
     }
-
 }

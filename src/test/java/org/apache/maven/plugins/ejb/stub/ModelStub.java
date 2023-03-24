@@ -1,5 +1,3 @@
-package org.apache.maven.plugins.ejb.stub;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,6 +16,7 @@ package org.apache.maven.plugins.ejb.stub;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.plugins.ejb.stub;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,62 +29,48 @@ import org.apache.maven.model.Profile;
 /**
  * Stub
  */
-public class ModelStub
-    extends Model
-{
+public class ModelStub extends Model {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -6823174384695495659L;
 
-    public ModelStub()
-    {
+    public ModelStub() {}
 
-    }
-
-    public String getVersion()
-    {
+    public String getVersion() {
         return "0.0-TEST";
     }
 
-    public String getModelVersion()
-    {
+    public String getModelVersion() {
         return "0.0-TEST";
     }
 
-    public String getName()
-    {
+    public String getName() {
         return "Test Model";
     }
 
-    public String getGroupId()
-    {
+    public String getGroupId() {
         return "org.apache.maven.test";
     }
 
-    public String getPackaging()
-    {
+    public String getPackaging() {
         return "jar";
     }
 
-    public Parent getParent()
-    {
+    public Parent getParent() {
         // return new Parent();
         return null;
     }
 
-    public String getArtifactId()
-    {
+    public String getArtifactId() {
         return "maven-test-plugin";
     }
 
-    public Properties getProperties()
-    {
+    public Properties getProperties() {
         return new Properties();
     }
 
-    public List<Profile> getProfiles()
-    {
+    public List<Profile> getProfiles() {
         return new LinkedList<Profile>();
     }
 }

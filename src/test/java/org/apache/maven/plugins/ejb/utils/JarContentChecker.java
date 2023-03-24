@@ -1,5 +1,3 @@
-package org.apache.maven.plugins.ejb.utils;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -18,6 +16,7 @@ package org.apache.maven.plugins.ejb.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.apache.maven.plugins.ejb.utils;
 
 import java.io.File;
 import java.util.Enumeration;
@@ -30,31 +29,26 @@ import java.util.jar.JarFile;
 /**
  * Jar Content Checker
  */
-public class JarContentChecker
-{
-    private final static Boolean FOUND = Boolean.TRUE;
+public class JarContentChecker {
+    private static final Boolean FOUND = Boolean.TRUE;
 
-    private final static Boolean NOT_FOUND = Boolean.FALSE;
+    private static final Boolean NOT_FOUND = Boolean.FALSE;
 
     private Map<File, Boolean> fileMap;
 
     private Map<File, Boolean> directoryMap;
 
-
-    public JarContentChecker()
-    {
+    public JarContentChecker() {
         fileMap = new HashMap<File, Boolean>();
         directoryMap = new HashMap<File, Boolean>();
     }
 
-    public void addDirectory( File dir )
-    {
-        directoryMap.put( dir, NOT_FOUND );
+    public void addDirectory(File dir) {
+        directoryMap.put(dir, NOT_FOUND);
     }
 
-    public void addFile( File file )
-    {
-        fileMap.put( file, NOT_FOUND );
+    public void addFile(File file) {
+        fileMap.put(file, NOT_FOUND);
     }
 
     /**
@@ -65,8 +59,7 @@ public class JarContentChecker
      * @param jarFile the Jar file
      * @return boolean
      */
-    public boolean isOK( JarFile jarFile )
-    {
+    public boolean isOK(JarFile jarFile) {
         boolean bRetVal;
         Enumeration<JarEntry> zipentries = jarFile.entries();
         JarEntry entry;
@@ -74,24 +67,19 @@ public class JarContentChecker
 
         resetList();
 
-        while ( zipentries.hasMoreElements() )
-        {
+        while (zipentries.hasMoreElements()) {
             entry = zipentries.nextElement();
-            entryFile = new File( entry.getName() );
+            entryFile = new File(entry.getName());
 
-            if ( entry.isDirectory() )
-            {
+            if (entry.isDirectory()) {
                 // cross out all files found in the jar file
                 // found files with incorrect content will not
                 // be counted
-                if ( directoryMap.containsKey( entryFile ) )
-                {
-                    directoryMap.put( entryFile, FOUND );
+                if (directoryMap.containsKey(entryFile)) {
+                    directoryMap.put(entryFile, FOUND);
                 }
-            }
-            else if ( fileMap.containsKey( entryFile ) )
-            {
-                fileMap.put( entryFile, FOUND );
+            } else if (fileMap.containsKey(entryFile)) {
+                fileMap.put(entryFile, FOUND);
             }
         }
 
@@ -100,26 +88,21 @@ public class JarContentChecker
         return bRetVal;
     }
 
-    private boolean checkFinalResult()
-    {
+    private boolean checkFinalResult() {
         boolean bRetVal = true;
 
         Iterator<File> keys = fileMap.keySet().iterator();
 
-        while ( keys.hasNext() && bRetVal )
-        {
-            if ( fileMap.get( keys.next() ).equals( NOT_FOUND ) )
-            {
+        while (keys.hasNext() && bRetVal) {
+            if (fileMap.get(keys.next()).equals(NOT_FOUND)) {
                 bRetVal = false;
             }
         }
 
         keys = directoryMap.keySet().iterator();
 
-        while ( keys.hasNext() && bRetVal )
-        {
-            if ( directoryMap.get( keys.next() ).equals( NOT_FOUND ) )
-            {
+        while (keys.hasNext() && bRetVal) {
+            if (directoryMap.get(keys.next()).equals(NOT_FOUND)) {
                 bRetVal = false;
             }
         }
@@ -127,20 +110,17 @@ public class JarContentChecker
         return bRetVal;
     }
 
-    private void resetList()
-    {
+    private void resetList() {
         Iterator<File> keys = fileMap.keySet().iterator();
 
-        while ( keys.hasNext() )
-        {
-            fileMap.put( keys.next(), NOT_FOUND );
+        while (keys.hasNext()) {
+            fileMap.put(keys.next(), NOT_FOUND);
         }
 
         keys = directoryMap.keySet().iterator();
 
-        while ( keys.hasNext() )
-        {
-            directoryMap.put( keys.next(), NOT_FOUND );
+        while (keys.hasNext()) {
+            directoryMap.put(keys.next(), NOT_FOUND);
         }
     }
 }
