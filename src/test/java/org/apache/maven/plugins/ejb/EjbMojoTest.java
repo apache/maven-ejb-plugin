@@ -221,11 +221,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      * @throws Exception if any exception occurs
      */
     public void testClientJarInclusions() throws Exception {
-        final List<String> inclusions = new LinkedList<String>();
+        final List<String> inclusions = new LinkedList<>();
         inclusions.add("**/*Include.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-includes");
-        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<String>(), null);
+        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<>(), null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -262,11 +262,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      */
     public void testClientJarExclusions() throws Exception {
 
-        final List<String> exclusions = new LinkedList<String>();
+        final List<String> exclusions = new LinkedList<>();
         exclusions.add("**/*Exclude.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-excludes");
-        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<String>(), exclusions, null);
+        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), exclusions, null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -302,12 +302,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      * @throws Exception if any exception occurs
      */
     public void testMainJarExclusions() throws Exception {
-        final List<String> exclusions = new LinkedList<String>();
+        final List<String> exclusions = new LinkedList<>();
         exclusions.add("**/*Exclude.class");
 
         final MavenProjectResourcesStub project = createTestProject("main-excludes");
-        final EjbMojo mojo =
-                lookupMojoWithSettings(project, new LinkedList<String>(), new LinkedList<String>(), exclusions);
+        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), new LinkedList<>(), exclusions);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -343,12 +342,12 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      * @throws Exception if any exception occurs
      */
     public void testClientJarInclusionsWithSubPackage() throws Exception {
-        final List<String> inclusions = new LinkedList<String>();
+        final List<String> inclusions = new LinkedList<>();
         inclusions.add("org/sample/ejb/*.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-includes-subpackage");
 
-        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<String>(), null);
+        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<>(), null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -385,11 +384,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      */
     public void testClientJarExclusionsWithEmptyPackage() throws Exception {
 
-        final LinkedList<String> exclusions = new LinkedList<String>();
+        final LinkedList<String> exclusions = new LinkedList<>();
         exclusions.add("org/sample/ejb/**");
 
         final MavenProjectResourcesStub project = createTestProject("client-excludes-emptypackage");
-        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<String>(), exclusions, null);
+        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), exclusions, null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -562,7 +561,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
     }
 
     protected EjbMojo lookupMojoWithDefaultSettings(final MavenProject project) throws Exception {
-        return lookupMojoWithSettings(project, new LinkedList<String>(), new LinkedList<String>(), null);
+        return lookupMojoWithSettings(project, new LinkedList<>(), new LinkedList<>(), null);
     }
 
     protected void assertJarCreation(

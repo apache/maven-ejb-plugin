@@ -39,8 +39,8 @@ public class JarContentChecker {
     private Map<File, Boolean> directoryMap;
 
     public JarContentChecker() {
-        fileMap = new HashMap<File, Boolean>();
-        directoryMap = new HashMap<File, Boolean>();
+        fileMap = new HashMap<>();
+        directoryMap = new HashMap<>();
     }
 
     public void addDirectory(File dir) {
