@@ -77,12 +77,12 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         super(key);
 
         this.build = new Build();
-        this.resourcesFileList = new ArrayList<String>();
-        this.sourceFileList = new ArrayList<String>();
-        this.rootFileList = new ArrayList<String>();
-        this.directoryList = new ArrayList<String>();
-        this.targetClassesList = new ArrayList<String>();
-        this.dataMap = new HashMap<String, String>();
+        this.resourcesFileList = new ArrayList<>();
+        this.sourceFileList = new ArrayList<>();
+        this.rootFileList = new ArrayList<>();
+        this.directoryList = new ArrayList<>();
+        this.targetClassesList = new ArrayList<>();
+        this.dataMap = new HashMap<>();
         setupBuild();
 
         model.setBuild(build);

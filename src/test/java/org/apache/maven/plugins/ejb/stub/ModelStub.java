@@ -71,6 +71,6 @@ public class ModelStub extends Model {
     }
 
     public List<Profile> getProfiles() {
-        return new LinkedList<Profile>();
+        return new LinkedList<>();
     }
 }
