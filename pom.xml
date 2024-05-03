@@ -35,7 +35,7 @@ under the License.
   <description>Generates a Java Enterprise JavaBean (EJB) file as well as the associated client JAR.</description>
 
   <prerequisites>
-    <maven>${mavenVersion}</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <scm>
@@ -60,7 +60,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.9.6</mavenVersion>
     <project.build.outputTimestamp>2022-04-18T18:55:30Z</project.build.outputTimestamp>
   </properties>
 
