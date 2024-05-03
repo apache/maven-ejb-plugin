@@ -60,7 +60,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.8.1</mavenVersion>
     <javaVersion>8</javaVersion>
     <mavenPluginToolsVersion>3.6.4</mavenPluginToolsVersion>
     <mavenFilteringVersion>3.2.0</mavenFilteringVersion>
