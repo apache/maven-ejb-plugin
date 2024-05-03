@@ -38,10 +38,10 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
+import org.apache.maven.shared.filtering.FilterWrapper;
 import org.apache.maven.shared.filtering.MavenFileFilter;
 import org.apache.maven.shared.filtering.MavenFilteringException;
 import org.apache.maven.shared.filtering.MavenResourcesExecution;
-import org.apache.maven.shared.utils.io.FileUtils.FilterWrapper;
 import org.codehaus.plexus.archiver.Archiver;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
@@ -349,7 +349,7 @@ public class EjbMojo extends AbstractMojo {
         archiver.setOutputFile(jarFile);
 
         // configure for Reproducible Builds based on outputTimestamp value
-        archiver.configureReproducible(outputTimestamp);
+        archiver.configureReproducibleBuild(outputTimestamp);
 
         File deploymentDescriptor = new File(sourceDirectory, ejbJar);
 
@@ -357,10 +357,9 @@ public class EjbMojo extends AbstractMojo {
 
         try {
             List<String> defaultExcludes = Arrays.asList(ejbJar, "**/package.html");
-            List<String> defaultIncludes = DEFAULT_INCLUDES_LIST;
 
             IncludesExcludes ie =
-                    new IncludesExcludes(Collections.<String>emptyList(), excludes, defaultIncludes, defaultExcludes);
+                    new IncludesExcludes(Collections.emptyList(), excludes, DEFAULT_INCLUDES_LIST, defaultExcludes);
 
             archiver.getArchiver().addDirectory(sourceDirectory, ie.resultingIncludes(), ie.resultingExcludes());
 
@@ -399,14 +398,12 @@ public class EjbMojo extends AbstractMojo {
         clientArchiver.setOutputFile(clientJarFile);
 
         // configure for Reproducible Builds based on outputTimestamp value
-        clientArchiver.configureReproducible(outputTimestamp);
+        clientArchiver.configureReproducibleBuild(outputTimestamp);
 
         try {
-            List<String> defaultExcludes = DEFAULT_CLIENT_EXCLUDES_LIST;
-            List<String> defaultIncludes = DEFAULT_INCLUDES_LIST;
 
-            IncludesExcludes ie =
-                    new IncludesExcludes(clientIncludes, clientExcludes, defaultIncludes, defaultExcludes);
+            IncludesExcludes ie = new IncludesExcludes(
+                    clientIncludes, clientExcludes, DEFAULT_INCLUDES_LIST, DEFAULT_CLIENT_EXCLUDES_LIST);
 
             clientArchiver.getArchiver().addDirectory(sourceDirectory, ie.resultingIncludes(), ie.resultingExcludes());
 
@@ -486,9 +483,9 @@ public class EjbMojo extends AbstractMojo {
      * @throws IOException if an error occurred while reading the file
      */
     private String getEncoding(File xmlFile) throws IOException {
-        try (XmlStreamReader xmlReader = new XmlStreamReader(xmlFile)) {
-            final String encoding = xmlReader.getEncoding();
-            return encoding;
+        try (XmlStreamReader xmlReader =
+                XmlStreamReader.builder().setFile(xmlFile).get()) {
+            return xmlReader.getEncoding();
         }
     }
 
