@@ -19,6 +19,7 @@
 
 import java.io.*
 import java.util.*
+import groovy.xml.XmlSlurper
 
 /**
  * This will filter out the version of the
@@ -52,17 +53,17 @@ if ( !jarFile.isFile() )
 
 def buildLog = new File( basedir, "build.log" ).getText('UTF-8')
 
-if (!buildLog.contains ('[INFO] --- maven-ejb-plugin:' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---')) {
+if (!buildLog.contains ('' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---')) {
   println ( "default executions did not happen.")
   return false
 }
-if (!buildLog.contains ('[INFO] --- maven-ejb-plugin:' + projectVersion + ':ejb (second-execution) @ maven-it-mejb93 ---')) {
+if (!buildLog.contains ('' + projectVersion + ':ejb (second-execution) @ maven-it-mejb93 ---')) {
   println ( "second executions did not happen.")
   return false
 }
-if (!buildLog.contains ('[ERROR] Failed to execute goal org.apache.maven.plugins:maven-ejb-plugin:' + projectVersion 
-    + ':ejb (second-execution) on project maven-it-mejb93: ' 
-    + 'You have to use a classifier to attach supplemental artifacts to the ' 
+if (!buildLog.contains ('[ERROR] Failed to execute goal org.apache.maven.plugins:maven-ejb-plugin:' + projectVersion
+    + ':ejb (second-execution) on project maven-it-mejb93: '
+    + 'You have to use a classifier to attach supplemental artifacts to the '
     + 'project instead of replacing them. -> [Help 1]')) {
   println ( "exception message does not exists or the expected content does not exist.")
   return false
