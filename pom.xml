@@ -153,15 +153,6 @@ under the License.
     </dependency>
   </dependencies>
 
-  <build>
-    <resources>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/filtered-resources</directory>
-      </resource>
-    </resources>
-  </build>
-
   <profiles>
     <profile>
       <id>run-its</id>
