@@ -18,6 +18,8 @@
  */
 package org.apache.maven.plugins.ejb;
 
+import javax.inject.Inject;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -31,7 +33,6 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -42,7 +43,6 @@ import org.apache.maven.shared.filtering.FilterWrapper;
 import org.apache.maven.shared.filtering.MavenFileFilter;
 import org.apache.maven.shared.filtering.MavenFilteringException;
 import org.apache.maven.shared.filtering.MavenResourcesExecution;
-import org.codehaus.plexus.archiver.Archiver;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
@@ -61,6 +61,10 @@ import org.codehaus.plexus.util.FileUtils;
         defaultPhase = LifecyclePhase.PACKAGE)
 public class EjbMojo extends AbstractMojo {
     private static final List<String> DEFAULT_INCLUDES_LIST = Collections.unmodifiableList(Arrays.asList("**/**"));
+
+    private static final String EJB_TYPE = "ejb";
+
+    private static final String EJB_CLIENT_TYPE = "ejb-client";
 
     // @formatter:off
     private static final List<String> DEFAULT_CLIENT_EXCLUDES_LIST = Collections.unmodifiableList(
@@ -180,12 +184,6 @@ public class EjbMojo extends AbstractMojo {
     private MavenProject project;
 
     /**
-     * The Jar archiver.
-     */
-    @Component(role = Archiver.class, hint = "jar")
-    private JarArchiver jarArchiver;
-
-    /**
      * What EJB version should the EJB Plugin generate? Valid values are "2.x", "3.x" or "4.x" (where x is a digit).
      * When ejbVersion is "2.x", the <code>ejb-jar.xml</code> file is mandatory.
      * <p/>
@@ -199,18 +197,6 @@ public class EjbMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "3.1")
     private String ejbVersion;
-
-    /**
-     * The client Jar archiver.
-     */
-    @Component(role = Archiver.class, hint = "jar")
-    private JarArchiver clientJarArchiver;
-
-    /**
-     * The Maven project's helper.
-     */
-    @Component
-    private MavenProjectHelper projectHelper;
 
     /**
      * The archive configuration to use. See <a href="http://maven.apache.org/shared/maven-archiver/index.html">Maven
@@ -254,12 +240,6 @@ public class EjbMojo extends AbstractMojo {
     /**
      * @since 2.3
      */
-    @Component(role = MavenFileFilter.class, hint = "default")
-    private MavenFileFilter mavenFileFilter;
-
-    /**
-     * @since 2.3
-     */
     @Parameter(defaultValue = "${session}", readonly = true, required = true)
     private MavenSession session;
 
@@ -273,9 +253,31 @@ public class EjbMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.outputTimestamp}")
     private String outputTimestamp;
 
-    private static final String EJB_TYPE = "ejb";
+    /**
+     * The Jar archiver.
+     */
+    private final JarArchiver jarArchiver = new JarArchiver();
 
-    private static final String EJB_CLIENT_TYPE = "ejb-client";
+    /**
+     * The client Jar archiver.
+     */
+    private JarArchiver clientJarArchiver = new JarArchiver();
+
+    /**
+     * The Maven project's helper.
+     */
+    private final MavenProjectHelper projectHelper;
+
+    /**
+     * @since 2.3
+     */
+    private final MavenFileFilter mavenFileFilter;
+
+    @Inject
+    public EjbMojo(MavenProjectHelper projectHelper, MavenFileFilter mavenFileFilter) {
+        this.projectHelper = projectHelper;
+        this.mavenFileFilter = mavenFileFilter;
+    }
 
     /**
      * Generates an EJB jar and optionally an ejb-client jar.
