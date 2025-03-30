@@ -45,8 +45,8 @@ under the License.
     <url>https://github.com/apache/maven-ejb-plugin/tree/${project.scm.tag}</url>
   </scm>
   <issueManagement>
-    <system>JIRA</system>
-    <url>https://issues.apache.org/jira/browse/MEJB</url>
+    <system>GitHub</system>
+    <url>https://github.com/apache/maven-ejb-plugin/issues/</url>
   </issueManagement>
   <ciManagement>
     <system>Jenkins</system>
