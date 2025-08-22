@@ -479,7 +479,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testEjbCompliance_3_0_WithoutDescriptor() throws Exception {
+    public void testEjbCompliance30WithoutDescriptor() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-3");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
 
