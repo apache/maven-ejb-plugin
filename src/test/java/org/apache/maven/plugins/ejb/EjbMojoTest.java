@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.jar.JarFile;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
@@ -479,7 +478,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testEjbCompliance_3_0_WithoutDescriptor() throws Exception {
+    public void testEjbCompliance30WithoutDescriptor() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-3");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
 
