@@ -21,8 +21,8 @@ package org.apache.maven.plugins.ejb;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class IncludesExcludesTest {
 
@@ -32,8 +32,8 @@ public class IncludesExcludesTest {
                 Collections.<String>emptyList(), Collections.<String>emptyList(),
                 Collections.<String>emptyList(), Collections.<String>emptyList());
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[0]);
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[0]);
     }
 
     @Test
@@ -44,8 +44,8 @@ public class IncludesExcludesTest {
                 Collections.<String>emptyList(),
                 Collections.<String>emptyList());
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[0]);
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[0]);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class IncludesExcludesTest {
                 Collections.<String>emptyList(),
                 Collections.<String>emptyList());
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[0]);
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[0]);
     }
 
     @Test
@@ -65,8 +65,8 @@ public class IncludesExcludesTest {
         IncludesExcludes ie =
                 new IncludesExcludes(null, null, Collections.<String>emptyList(), Arrays.asList("**/package.html"));
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[0]);
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[] {"**/package.html"});
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[] {"**/package.html"});
     }
 
     @Test
@@ -74,8 +74,8 @@ public class IncludesExcludesTest {
         IncludesExcludes ie =
                 new IncludesExcludes(null, null, Arrays.asList("**/package.html"), Collections.<String>emptyList());
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[] {"**/package.html"});
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[0]);
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[] {"**/package.html"});
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[0]);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class IncludesExcludesTest {
                 Arrays.asList("**/package.html"), null,
                 Arrays.asList("**/site.html"), null);
 
-        Assert.assertArrayEquals(ie.resultingIncludes(), new String[] {"**/package.html"});
+        Assertions.assertArrayEquals(ie.resultingIncludes(), new String[] {"**/package.html"});
     }
 
     @Test
@@ -93,6 +93,6 @@ public class IncludesExcludesTest {
                 null, Arrays.asList("**/package.html"),
                 null, Arrays.asList("**/site.html"));
 
-        Assert.assertArrayEquals(ie.resultingExcludes(), new String[] {"**/package.html"});
+        Assertions.assertArrayEquals(ie.resultingExcludes(), new String[] {"**/package.html"});
     }
 }

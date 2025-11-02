@@ -30,6 +30,13 @@ import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
 import org.apache.maven.plugins.ejb.utils.JarContentChecker;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * EJB plugin Test Case
@@ -44,6 +51,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testTestEnvironment() throws Exception {
         // Perform lookup on the Mojo to make sure everything is ok
         lookupMojo();
@@ -54,6 +62,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testDefaultWithoutClientJar() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("default-noclient");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -73,6 +82,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClassifiedJarWithoutClientJar() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("classified-noclient");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -93,6 +103,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testDefaultWithClientJar() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("default-client");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -112,6 +123,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClassifiedJarWithClientJar() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("classified-client");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -133,6 +145,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testDefaultInclusionsExclusions() throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("includes-excludes-default");
@@ -175,6 +188,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClientJarDefaultInclusionsExclusions() throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("includes-excludes-client");
@@ -220,6 +234,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClientJarInclusions() throws Exception {
         final List<String> inclusions = new LinkedList<>();
         inclusions.add("**/*Include.class");
@@ -260,6 +275,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClientJarExclusions() throws Exception {
 
         final List<String> exclusions = new LinkedList<>();
@@ -301,6 +317,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testMainJarExclusions() throws Exception {
         final List<String> exclusions = new LinkedList<>();
         exclusions.add("**/*Exclude.class");
@@ -341,6 +358,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClientJarInclusionsWithSubPackage() throws Exception {
         final List<String> inclusions = new LinkedList<>();
         inclusions.add("org/sample/ejb/*.class");
@@ -382,6 +400,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testClientJarExclusionsWithEmptyPackage() throws Exception {
 
         final LinkedList<String> exclusions = new LinkedList<>();
@@ -426,6 +445,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testEjbComplianceVersionTwoDotOneWithoutDescriptor() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-2.1");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -452,6 +472,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testEjbComplianceVersionThreeWithDescriptor() throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("compliance-descriptor-3");
@@ -479,6 +500,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
+    @Test
     public void testEjbCompliance_3_0_WithoutDescriptor() throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-3");
         final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
@@ -497,6 +519,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         assertJarCreation(project, true, false);
     }
 
+    @Test
     public void testEjb1VersionValidation() {
         try {
             EjbMojo.validateEjbVersion("1.1");
@@ -505,14 +528,17 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         }
     }
 
+    @Test
     public void testEjb2VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("2.1");
     }
 
+    @Test
     public void testEjb3VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("3.2");
     }
 
+    @Test
     public void testEjb4VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("4.0");
     }
@@ -578,11 +604,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
                     project.getBuild().getDirectory() + "/" + DEFAULT_JAR_NAME + "-" + classifier + "-client.jar";
         }
 
-        assertEquals("Invalid value for ejb-jar creation", ejbJarCreated, FileUtils.fileExists(checkedJarFile));
+        assertEquals(ejbJarCreated, FileUtils.fileExists(checkedJarFile), "Invalid value for ejb-jar creation");
         assertEquals(
-                "Invalid value for ejb-jar client creation",
                 ejbClientJarCreated,
-                FileUtils.fileExists(checkedClientJarFile));
+                FileUtils.fileExists(checkedClientJarFile),
+                "Invalid value for ejb-jar client creation");
     }
 
     protected void assertJarCreation(final MavenProject project, boolean ejbJarCreated, boolean ejbClientJarCreated) {
