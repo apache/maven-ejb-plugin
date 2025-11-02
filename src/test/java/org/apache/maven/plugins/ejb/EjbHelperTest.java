@@ -20,58 +20,61 @@ package org.apache.maven.plugins.ejb;
 
 import java.io.File;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class EjbHelperTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class EjbHelperTest {
 
     @Test
-    public void validClassifier() {
-        Assert.assertTrue(EjbHelper.isClassifierValid("anton"));
+    void validClassifier() {
+        assertTrue(EjbHelper.isClassifierValid("anton"));
     }
 
     @Test
-    public void anOtherValidClassifier() {
-        Assert.assertTrue(EjbHelper.isClassifierValid("jdk15"));
+    void anOtherValidClassifier() {
+        assertTrue(EjbHelper.isClassifierValid("jdk15"));
     }
 
     @Test
-    public void moreValidClassifier() {
-        Assert.assertTrue(EjbHelper.isClassifierValid("client-classifier"));
+    void moreValidClassifier() {
+        assertTrue(EjbHelper.isClassifierValid("client-classifier"));
     }
 
     @Test
-    public void isClassifierValidShouldReturnFalseIfClassifierIsPrefixedByDash() {
-        Assert.assertFalse(EjbHelper.isClassifierValid("-anton"));
+    void isClassifierValidShouldReturnFalseIfClassifierIsPrefixedByDash() {
+        assertFalse(EjbHelper.isClassifierValid("-anton"));
     }
 
     @Test
-    public void isClassifierValidShouldReturnFalseIfClassifierIsNull() {
-        Assert.assertFalse(EjbHelper.isClassifierValid(null));
+    void isClassifierValidShouldReturnFalseIfClassifierIsNull() {
+        assertFalse(EjbHelper.isClassifierValid(null));
     }
 
     @Test
-    public void hasClassifierShouldReturnFalseForNull() {
-        Assert.assertFalse(EjbHelper.hasClassifier(null));
+    void hasClassifierShouldReturnFalseForNull() {
+        assertFalse(EjbHelper.hasClassifier(null));
     }
 
     @Test
-    public void hasClassifierShouldReturnFalseForEmptyString() {
-        Assert.assertFalse(EjbHelper.hasClassifier(""));
+    void hasClassifierShouldReturnFalseForEmptyString() {
+        assertFalse(EjbHelper.hasClassifier(""));
     }
 
     @Test
-    public void hasClassifierShouldReturnTrueForNonEmptyString() {
-        Assert.assertTrue(EjbHelper.hasClassifier("x"));
+    void hasClassifierShouldReturnTrueForNonEmptyString() {
+        assertTrue(EjbHelper.hasClassifier("x"));
     }
 
     @Test
-    public void getJarFileNameShouldReturnFileNameWithoutClassifier() {
-        Assert.assertEquals(EjbHelper.getJarFile(new File("base"), "test", null), new File("base/test.jar"));
+    void getJarFileNameShouldReturnFileNameWithoutClassifier() {
+        assertEquals(EjbHelper.getJarFile(new File("base"), "test", null), new File("base/test.jar"));
     }
 
     @Test
-    public void getJarFileNameShouldReturnFileNameWithClassifier() {
-        Assert.assertEquals(EjbHelper.getJarFile(new File("base"), "test", "alpha"), new File("base/test-alpha.jar"));
+    void getJarFileNameShouldReturnFileNameWithClassifier() {
+        assertEquals(EjbHelper.getJarFile(new File("base"), "test", "alpha"), new File("base/test-alpha.jar"));
     }
 }
