@@ -29,7 +29,6 @@ import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
 import org.apache.maven.plugins.ejb.utils.JarContentChecker;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.util.FileUtils;
 
 /**
  * EJB plugin Test Case
@@ -578,11 +577,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
                     project.getBuild().getDirectory() + "/" + DEFAULT_JAR_NAME + "-" + classifier + "-client.jar";
         }
 
-        assertEquals("Invalid value for ejb-jar creation", ejbJarCreated, FileUtils.fileExists(checkedJarFile));
+        assertEquals("Invalid value for ejb-jar creation", ejbJarCreated, new File(checkedJarFile).exists());
         assertEquals(
                 "Invalid value for ejb-jar client creation",
                 ejbClientJarCreated,
-                FileUtils.fileExists(checkedClientJarFile));
+                new File(checkedClientJarFile).exists());
     }
 
     protected void assertJarCreation(final MavenProject project, boolean ejbJarCreated, boolean ejbClientJarCreated) {
