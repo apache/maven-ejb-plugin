@@ -230,7 +230,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
                 retVal = rootFileList;
                 break;
             default:
-                // do nothing
+            // do nothing
         }
 
         return retVal;

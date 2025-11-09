@@ -62,6 +62,7 @@ under the License.
   <properties>
     <mavenVersion>3.9.6</mavenVersion>
     <project.build.outputTimestamp>2022-04-18T18:55:30Z</project.build.outputTimestamp>
+    <version.palantirJavaFormat>2.81.0</version.palantirJavaFormat>
   </properties>
 
   <dependencies>
