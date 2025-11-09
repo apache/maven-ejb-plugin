@@ -168,7 +168,9 @@ under the License.
               <goal>analyze-only</goal>
             </goals>
             <configuration>
-              <excludedClasses>org.sample.ejb.AppExclude</excludedClasses>
+              <excludedClasses>
+                <exclude>.*org.sample.ejb.*</exclude>
+              </excludedClasses>
             </configuration>
           </execution>
         </executions>
