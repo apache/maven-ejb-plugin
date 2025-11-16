@@ -39,11 +39,8 @@ public class IncludesExcludesTest {
 
     @Test
     public void nullForIncludesShouldResultInZeroSizeResults() {
-        IncludesExcludes ie = new IncludesExcludes(
-                null,
-                Collections.emptyList(),
-                Collections.emptyList(),
-                Collections.emptyList());
+        IncludesExcludes ie =
+                new IncludesExcludes(null, Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
@@ -51,11 +48,8 @@ public class IncludesExcludesTest {
 
     @Test
     public void nullForExcludesShouldResultInZeroSizeResults() {
-        IncludesExcludes ie = new IncludesExcludes(
-                Collections.emptyList(),
-                null,
-                Collections.emptyList(),
-                Collections.emptyList());
+        IncludesExcludes ie =
+                new IncludesExcludes(Collections.emptyList(), null, Collections.emptyList(), Collections.emptyList());
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
