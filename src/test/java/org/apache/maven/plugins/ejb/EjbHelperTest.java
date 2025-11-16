@@ -67,11 +67,11 @@ public class EjbHelperTest {
 
     @Test
     public void getJarFileNameShouldReturnFileNameWithoutClassifier() {
-        Assert.assertEquals(EjbHelper.getJarFile(new File("base"), "test", null), new File("base/test.jar"));
+        Assert.assertEquals(new File("base/test.jar"), EjbHelper.getJarFile(new File("base"), "test", null));
     }
 
     @Test
     public void getJarFileNameShouldReturnFileNameWithClassifier() {
-        Assert.assertEquals(EjbHelper.getJarFile(new File("base"), "test", "alpha"), new File("base/test-alpha.jar"));
+        Assert.assertEquals(new File("base/test-alpha.jar"), EjbHelper.getJarFile(new File("base"), "test", "alpha"));
     }
 }
