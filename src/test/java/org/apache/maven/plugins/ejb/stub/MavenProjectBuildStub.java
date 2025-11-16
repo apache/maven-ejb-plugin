@@ -94,10 +94,6 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         return outputDirectory;
     }
 
-    public String getTestOutputDirectory() {
-        return testOutputDirectory;
-    }
-
     public Build getBuild() {
         return build;
     }
@@ -245,7 +241,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
 
     private void populateFile(File file, int type) {
         FileOutputStream outputStream;
-        String data = (String) dataMap.get(file.getName());
+        String data = dataMap.get(file.getName());
 
         if ((data != null) && file.exists()) {
             try {

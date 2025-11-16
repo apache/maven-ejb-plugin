@@ -45,8 +45,6 @@ public class MavenProjectBasicStub extends MavenProject {
 
     protected ModelStub model;
 
-    protected File file;
-
     protected DefaultArtifact artifact;
 
     public MavenProjectBasicStub(String id) throws Exception {
@@ -113,16 +111,8 @@ public class MavenProjectBasicStub extends MavenProject {
         return getModel().getArtifactId();
     }
 
-    public String getPackaging() {
-        return "ejb";
-    }
-
     public String getVersion() {
         return identifier;
-    }
-
-    public void addProperty(String key, String value) {
-        properties.put(key, value);
     }
 
     public Properties getProperties() {
@@ -133,13 +123,13 @@ public class MavenProjectBasicStub extends MavenProject {
     private void initializeParentFields() {
         // the pom should be located in the isolated dummy root
         super.setFile(new File(getBasedir(), "pom.xml"));
-        super.setDependencyArtifacts(Collections.<Artifact>emptySet());
-        super.setArtifacts(Collections.<Artifact>emptySet());
-        super.setExtensionArtifacts(Collections.<Artifact>emptySet());
-        super.setRemoteArtifactRepositories(Collections.<ArtifactRepository>emptyList());
-        super.setPluginArtifactRepositories(Collections.<ArtifactRepository>emptyList());
-        super.setCollectedProjects(Collections.<MavenProject>emptyList());
-        super.setActiveProfiles(Collections.<Profile>emptyList());
+        super.setDependencyArtifacts(Collections.emptySet());
+        super.setArtifacts(Collections.emptySet());
+        super.setExtensionArtifacts(Collections.emptySet());
+        super.setRemoteArtifactRepositories(Collections.emptyList());
+        super.setPluginArtifactRepositories(Collections.emptyList());
+        super.setCollectedProjects(Collections.emptyList());
+        super.setActiveProfiles(Collections.emptyList());
         super.setOriginalModel(null);
         super.setExecutionProject(this);
         super.setArtifact(artifact);
