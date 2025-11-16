@@ -218,7 +218,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
             if (!currentFile.exists()) {
                 try {
                     currentFile.createNewFile();
-                    populateFile(currentFile, RESOURCES_FILE);
+                    populateFile(currentFile);
                 } catch (IOException io) {
                     // TODO: handle exception
                 }
@@ -239,7 +239,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         createFiles(testparent, RESOURCES_FILE);
     }
 
-    private void populateFile(File file, int type) {
+    private void populateFile(File file) {
         FileOutputStream outputStream;
         String data = dataMap.get(file.getName());
 
