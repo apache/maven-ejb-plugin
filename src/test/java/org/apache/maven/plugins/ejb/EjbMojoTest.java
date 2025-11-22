@@ -518,7 +518,7 @@ public class EjbMojoTest extends AbstractMojoTestCase {
 
     protected EjbMojo lookupMojo() throws Exception {
         File pomFile = new File(getBasedir(), DEFAULT_POM_PATH);
-        EjbMojo mojo = (EjbMojo) lookupMojo("ejb", pomFile);
+        EjbMojo mojo = lookupMojo("ejb", pomFile);
 
         assertNotNull(mojo);
 
