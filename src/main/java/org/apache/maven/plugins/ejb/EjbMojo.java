@@ -47,9 +47,8 @@ import org.codehaus.plexus.archiver.AbstractArchiver;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
+import org.codehaus.plexus.archiver.util.DefaultFileSet;
 import org.codehaus.plexus.util.FileUtils;
-
-import static org.codehaus.plexus.archiver.util.DefaultFileSet.fileSet;
 
 /**
  * Build an EJB (and optional client) from the current project.
@@ -367,7 +366,7 @@ public class EjbMojo extends AbstractMojo {
                     new IncludesExcludes(Collections.emptyList(), excludes, DEFAULT_INCLUDES_LIST, defaultExcludes);
 
             AbstractArchiver abstractArchiver = archiver.getArchiver();
-            abstractArchiver.addFileSet(fileSet(sourceDirectory)
+            abstractArchiver.addFileSet(DefaultFileSet.fileSet(sourceDirectory)
                     .prefixed("")
                     .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
@@ -413,7 +412,7 @@ public class EjbMojo extends AbstractMojo {
                     clientIncludes, clientExcludes, DEFAULT_INCLUDES_LIST, DEFAULT_CLIENT_EXCLUDES_LIST);
 
             AbstractArchiver abstractArchiver = clientArchiver.getArchiver();
-            abstractArchiver.addFileSet(fileSet(sourceDirectory)
+            abstractArchiver.addFileSet(DefaultFileSet.fileSet(sourceDirectory)
                     .prefixed("")
                     .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
