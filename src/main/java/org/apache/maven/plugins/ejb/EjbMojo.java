@@ -43,10 +43,13 @@ import org.apache.maven.shared.filtering.FilterWrapper;
 import org.apache.maven.shared.filtering.MavenFileFilter;
 import org.apache.maven.shared.filtering.MavenFilteringException;
 import org.apache.maven.shared.filtering.MavenResourcesExecution;
+import org.codehaus.plexus.archiver.AbstractArchiver;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
 import org.codehaus.plexus.util.FileUtils;
+
+import static org.codehaus.plexus.archiver.util.DefaultFileSet.fileSet;
 
 /**
  * Build an EJB (and optional client) from the current project.
@@ -363,7 +366,10 @@ public class EjbMojo extends AbstractMojo {
             IncludesExcludes ie =
                     new IncludesExcludes(Collections.emptyList(), excludes, DEFAULT_INCLUDES_LIST, defaultExcludes);
 
-            archiver.getArchiver().addDirectory(sourceDirectory, ie.resultingIncludes(), ie.resultingExcludes());
+            AbstractArchiver abstractArchiver = archiver.getArchiver();
+            final String[] includes = ie.resultingIncludes();
+            final String[] excludes1 = ie.resultingExcludes();
+            abstractArchiver.addFileSet(fileSet(sourceDirectory).prefixed("").includeExclude(includes, excludes1));
 
             // FIXME: We should be able to filter more than just the deployment descriptor?
             if (deploymentDescriptor.exists()) {
@@ -407,7 +413,10 @@ public class EjbMojo extends AbstractMojo {
             IncludesExcludes ie = new IncludesExcludes(
                     clientIncludes, clientExcludes, DEFAULT_INCLUDES_LIST, DEFAULT_CLIENT_EXCLUDES_LIST);
 
-            clientArchiver.getArchiver().addDirectory(sourceDirectory, ie.resultingIncludes(), ie.resultingExcludes());
+            AbstractArchiver abstractArchiver = clientArchiver.getArchiver();
+            final String[] includes = ie.resultingIncludes();
+            final String[] excludes1 = ie.resultingExcludes();
+            abstractArchiver.addFileSet(fileSet(sourceDirectory).prefixed("").includeExclude(includes, excludes1));
 
             clientArchiver.createArchive(session, project, archive);
 
