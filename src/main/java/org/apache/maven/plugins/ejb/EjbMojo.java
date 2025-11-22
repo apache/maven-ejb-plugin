@@ -367,9 +367,9 @@ public class EjbMojo extends AbstractMojo {
                     new IncludesExcludes(Collections.emptyList(), excludes, DEFAULT_INCLUDES_LIST, defaultExcludes);
 
             AbstractArchiver abstractArchiver = archiver.getArchiver();
-            final String[] includes = ie.resultingIncludes();
-            final String[] excludes1 = ie.resultingExcludes();
-            abstractArchiver.addFileSet(fileSet(sourceDirectory).prefixed("").includeExclude(includes, excludes1));
+            abstractArchiver.addFileSet(fileSet(sourceDirectory)
+                    .prefixed("")
+                    .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
             // FIXME: We should be able to filter more than just the deployment descriptor?
             if (deploymentDescriptor.exists()) {
@@ -409,14 +409,13 @@ public class EjbMojo extends AbstractMojo {
         clientArchiver.configureReproducibleBuild(outputTimestamp);
 
         try {
-
             IncludesExcludes ie = new IncludesExcludes(
                     clientIncludes, clientExcludes, DEFAULT_INCLUDES_LIST, DEFAULT_CLIENT_EXCLUDES_LIST);
 
             AbstractArchiver abstractArchiver = clientArchiver.getArchiver();
-            final String[] includes = ie.resultingIncludes();
-            final String[] excludes1 = ie.resultingExcludes();
-            abstractArchiver.addFileSet(fileSet(sourceDirectory).prefixed("").includeExclude(includes, excludes1));
+            abstractArchiver.addFileSet(fileSet(sourceDirectory)
+                    .prefixed("")
+                    .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
             clientArchiver.createArchive(session, project, archive);
 
