@@ -43,7 +43,6 @@ import org.apache.maven.shared.filtering.FilterWrapper;
 import org.apache.maven.shared.filtering.MavenFileFilter;
 import org.apache.maven.shared.filtering.MavenFilteringException;
 import org.apache.maven.shared.filtering.MavenResourcesExecution;
-import org.codehaus.plexus.archiver.AbstractArchiver;
 import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
@@ -365,10 +364,10 @@ public class EjbMojo extends AbstractMojo {
             IncludesExcludes ie =
                     new IncludesExcludes(Collections.emptyList(), excludes, DEFAULT_INCLUDES_LIST, defaultExcludes);
 
-            AbstractArchiver abstractArchiver = archiver.getArchiver();
-            abstractArchiver.addFileSet(DefaultFileSet.fileSet(sourceDirectory)
-                    .prefixed("")
-                    .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
+            archiver.getArchiver()
+                    .addFileSet(DefaultFileSet.fileSet(sourceDirectory)
+                            .prefixed("")
+                            .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
             // FIXME: We should be able to filter more than just the deployment descriptor?
             if (deploymentDescriptor.exists()) {
@@ -411,10 +410,11 @@ public class EjbMojo extends AbstractMojo {
             IncludesExcludes ie = new IncludesExcludes(
                     clientIncludes, clientExcludes, DEFAULT_INCLUDES_LIST, DEFAULT_CLIENT_EXCLUDES_LIST);
 
-            AbstractArchiver abstractArchiver = clientArchiver.getArchiver();
-            abstractArchiver.addFileSet(DefaultFileSet.fileSet(sourceDirectory)
-                    .prefixed("")
-                    .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
+            clientArchiver
+                    .getArchiver()
+                    .addFileSet(DefaultFileSet.fileSet(sourceDirectory)
+                            .prefixed("")
+                            .includeExclude(ie.resultingIncludes(), ie.resultingExcludes()));
 
             clientArchiver.createArchive(session, project, archive);
 
