@@ -193,7 +193,7 @@ under the License.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.6.2</version>
+        <version>${version.maven-enforcer-plugin}</version>
         <configuration>
           <rules>
             <!-- As of 2026-01-10 the build is not ready for Maven 4.0.0-rc5, excluding 3.99.99+ as 4.0.0 would not exclude alphas/beta/rc -->
