@@ -233,10 +233,6 @@ under the License.
                   <goal>clean</goal>
                   <goal>package</goal>
                 </goals>
-                <properties>
-                  <maven.compiler.source>${javaVersion}</maven.compiler.source>
-                  <maven.compiler.target>${javaVersion}</maven.compiler.target>
-                </properties>
               </configuration>
             </plugin>
           </plugins>
