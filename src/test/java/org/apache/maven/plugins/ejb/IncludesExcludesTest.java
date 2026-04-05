@@ -21,14 +21,14 @@ package org.apache.maven.plugins.ejb;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class IncludesExcludesTest {
+class IncludesExcludesTest {
 
     @Test
-    public void emptyListsShouldResultInZeroSizeResults() {
+    void emptyListsShouldResultInZeroSizeResults() {
         IncludesExcludes ie = new IncludesExcludes(
                 Collections.emptyList(), Collections.<String>emptyList(),
                 Collections.emptyList(), Collections.<String>emptyList());
@@ -38,25 +38,31 @@ public class IncludesExcludesTest {
     }
 
     @Test
-    public void nullForIncludesShouldResultInZeroSizeResults() {
-        IncludesExcludes ie =
-                new IncludesExcludes(null, Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
+    void nullForIncludesShouldResultInZeroSizeResults() {
+        IncludesExcludes ie = new IncludesExcludes(
+                null,
+                Collections.<String>emptyList(),
+                Collections.<String>emptyList(),
+                Collections.<String>emptyList());
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
     }
 
     @Test
-    public void nullForExcludesShouldResultInZeroSizeResults() {
-        IncludesExcludes ie =
-                new IncludesExcludes(Collections.emptyList(), null, Collections.emptyList(), Collections.emptyList());
+    void nullForExcludesShouldResultInZeroSizeResults() {
+        IncludesExcludes ie = new IncludesExcludes(
+                Collections.<String>emptyList(),
+                null,
+                Collections.<String>emptyList(),
+                Collections.<String>emptyList());
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
     }
 
     @Test
-    public void nonNullForDefaultExcludesShouldResultInExcludesWithDefaultExcludes() {
+    void nonNullForDefaultExcludesShouldResultInExcludesWithDefaultExcludes() {
         IncludesExcludes ie =
                 new IncludesExcludes(null, null, Collections.emptyList(), Arrays.asList("**/package.html"));
 
@@ -65,7 +71,7 @@ public class IncludesExcludesTest {
     }
 
     @Test
-    public void nonNullForDefaultIncludesShouldResultInIncludesWithDefaultIncludes() {
+    void nonNullForDefaultIncludesShouldResultInIncludesWithDefaultIncludes() {
         IncludesExcludes ie =
                 new IncludesExcludes(null, null, Arrays.asList("**/package.html"), Collections.emptyList());
 
@@ -74,7 +80,7 @@ public class IncludesExcludesTest {
     }
 
     @Test
-    public void nonNullIncludesShouldResultInTheSameIncludes() {
+    void nonNullIncludesShouldResultInTheSameIncludes() {
         IncludesExcludes ie = new IncludesExcludes(
                 Arrays.asList("**/package.html"), null,
                 Arrays.asList("**/site.html"), null);
@@ -83,7 +89,7 @@ public class IncludesExcludesTest {
     }
 
     @Test
-    public void nonNullExcludesShouldResultInTheSameExcludes() {
+    void nonNullExcludesShouldResultInTheSameExcludes() {
         IncludesExcludes ie = new IncludesExcludes(
                 null, Arrays.asList("**/package.html"),
                 null, Arrays.asList("**/site.html"));

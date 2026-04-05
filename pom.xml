@@ -23,7 +23,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-plugins</artifactId>
-    <version>45</version>
+    <version>47</version>
     <relativePath />
   </parent>
 
@@ -60,9 +60,13 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.9.6</mavenVersion>
+    <javaVersion>8</javaVersion>
+    <mavenVersion>3.9.12</mavenVersion>
     <project.build.outputTimestamp>2025-11-16T13:25:49Z</project.build.outputTimestamp>
-    <version.palantirJavaFormat>2.81.0</version.palantirJavaFormat>
+    <!-- mavenArchiverVersion is also used by site -->
+    <mavenArchiverVersion>3.6.6</mavenArchiverVersion>
+    <!-- mavenFilteringVersion is also used by site -->
+    <mavenFilteringVersion>3.5.0</mavenFilteringVersion>
   </properties>
 
   <dependencies>
@@ -99,7 +103,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-archiver</artifactId>
-      <version>3.6.5</version>
+      <version>${mavenArchiverVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
@@ -110,7 +114,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
       <artifactId>maven-filtering</artifactId>
-      <version>3.4.0</version>
+      <version>${mavenFilteringVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
@@ -118,17 +122,24 @@ under the License.
       <version>3.4.2</version>
     </dependency>
     <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.sisu</groupId>
+      <artifactId>org.eclipse.sisu.plexus</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
     </dependency>
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-xml</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-archiver</artifactId>
-      <version>4.10.4</version>
+      <version>4.11.0</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -136,9 +147,13 @@ under the License.
       <version>2.21.0</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -150,7 +165,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.plugin-testing</groupId>
       <artifactId>maven-plugin-testing-harness</artifactId>
-      <version>3.4.0</version>
+      <version>3.5.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -160,7 +175,7 @@ under the License.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.9.0</version>
+        <version>3.10.0</version>
         <executions>
           <execution>
             <id>analyze</id>
@@ -175,6 +190,19 @@ under the License.
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${version.maven-enforcer-plugin}</version>
+        <configuration>
+          <rules>
+            <!-- As of 2026-01-10 the build is not ready for Maven 4.0.0-rc5, excluding 3.99.99+ as 4.0.0 would not exclude alphas/beta/rc -->
+            <requireMavenVersion>
+              <version>[3.6.3,3.99.99)</version>
+            </requireMavenVersion>
+          </rules>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -187,7 +215,6 @@ under the License.
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-invoker-plugin</artifactId>
-              <version>3.9.1</version>
               <configuration>
                 <debug>true</debug>
                 <projectsDirectory>src/it</projectsDirectory>
