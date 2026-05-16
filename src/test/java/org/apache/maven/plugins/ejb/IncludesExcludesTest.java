@@ -30,8 +30,8 @@ class IncludesExcludesTest {
     @Test
     void emptyListsShouldResultInZeroSizeResults() {
         IncludesExcludes ie = new IncludesExcludes(
-                Collections.<String>emptyList(), Collections.<String>emptyList(),
-                Collections.<String>emptyList(), Collections.<String>emptyList());
+                Collections.emptyList(), Collections.<String>emptyList(),
+                Collections.emptyList(), Collections.<String>emptyList());
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
@@ -64,7 +64,7 @@ class IncludesExcludesTest {
     @Test
     void nonNullForDefaultExcludesShouldResultInExcludesWithDefaultExcludes() {
         IncludesExcludes ie =
-                new IncludesExcludes(null, null, Collections.<String>emptyList(), Arrays.asList("**/package.html"));
+                new IncludesExcludes(null, null, Collections.emptyList(), Arrays.asList("**/package.html"));
 
         assertArrayEquals(new String[0], ie.resultingIncludes());
         assertArrayEquals(new String[] {"**/package.html"}, ie.resultingExcludes());
@@ -73,7 +73,7 @@ class IncludesExcludesTest {
     @Test
     void nonNullForDefaultIncludesShouldResultInIncludesWithDefaultIncludes() {
         IncludesExcludes ie =
-                new IncludesExcludes(null, null, Arrays.asList("**/package.html"), Collections.<String>emptyList());
+                new IncludesExcludes(null, null, Arrays.asList("**/package.html"), Collections.emptyList());
 
         assertArrayEquals(new String[] {"**/package.html"}, ie.resultingIncludes());
         assertArrayEquals(new String[0], ie.resultingExcludes());
