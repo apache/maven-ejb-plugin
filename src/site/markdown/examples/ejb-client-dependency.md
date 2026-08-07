@@ -1,3 +1,10 @@
+---
+title: Using the ejb-client as a dependency
+author: 
+  - Pete Marvin King
+date: 2009-04-07
+---
+
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
