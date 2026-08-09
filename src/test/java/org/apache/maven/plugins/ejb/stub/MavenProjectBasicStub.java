@@ -28,7 +28,7 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.PlexusTestCase;
+import org.codehaus.plexus.testing.PlexusExtension;
 import org.codehaus.plexus.util.FileUtils;
 
 /**
@@ -60,7 +60,7 @@ public class MavenProjectBasicStub extends MavenProject {
         artifact = new DefaultArtifact(getGroupId(), getArtifactId(), getVersion(), "compile", "jar", "", null);
 
         // set isolated root directory
-        testRootDir = PlexusTestCase.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
+        testRootDir = PlexusExtension.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
 
         if (!new File(testRootDir).exists()) {
             FileUtils.mkdir(testRootDir);
