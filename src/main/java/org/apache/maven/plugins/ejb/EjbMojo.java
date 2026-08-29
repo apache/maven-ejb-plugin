@@ -286,9 +286,11 @@ public class EjbMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
 
         if (!sourceDirectory.exists()) {
-            getLog().warn("The created EJB jar will be empty cause the " + sourceDirectory.getPath()
-                    + " did not exist.");
-            sourceDirectory.mkdirs();
+            getLog().warn("The created EJB jar will be empty because the source directory " + sourceDirectory.getPath()
+                    + " does not exist.");
+            if (!sourceDirectory.mkdirs() && !sourceDirectory.isDirectory()) {
+                throw new MojoExecutionException("Could not create source directory " + sourceDirectory.getPath());
+            }
         }
 
         File jarFile = generateEjb();
