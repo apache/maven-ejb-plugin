@@ -57,7 +57,7 @@ To generate the ejb-client JAR, set `generateClient` to `true` in the plugin con
 Client inclusions and exclusions
 --------------------------------
 
-You can also customize the content of the ejb-client archive with includes and excludes.
+You can customize the content of the ejb-client archive with includes and excludes.
 
 #[[### Default Exclusions:]]#
 
