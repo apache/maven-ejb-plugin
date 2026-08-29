@@ -26,11 +26,13 @@ under the License.
 
 # Using the ejb-client as a dependency
 
-The EJB Plugin is capable of generating another artifact aside from the primary one which is EJB. To choose the EJB client as the dependency just specify the `type` as `ejb-client`.
+The EJB Plugin can generate the ejb-client JAR in addition to the primary EJB JAR.
 
-## Normal way of adding an EJB dependency
+To use the EJB client as a dependency, set the `type` to `ejb-client`.
 
-The following dependency declaration would include the primary EJB artifact `ejb-project-1.0-SNAPSHOT.jar` in your project's package.
+## Add an EJB dependency
+
+This dependency declaration includes the primary EJB artifact `ejb-project-1.0-SNAPSHOT.jar` in your project's package.
 
 ```xml
 <project>
@@ -47,9 +49,9 @@ The following dependency declaration would include the primary EJB artifact `ejb
 </project>
 ```
 
-## Using the ejb-client
+## Use the EJB client
 
-Using the following dependency declaration would instead use the ejb-client artifact `ejb-project-1.0-SNAPSHOT-client.jar` in your project's package.
+This dependency declaration includes the ejb-client artifact `ejb-project-1.0-SNAPSHOT-client.jar` in your project's package.
 
 ```xml
 <project>
@@ -66,4 +68,4 @@ Using the following dependency declaration would instead use the ejb-client arti
 </project>
 ```
 
-Read more about [Generating the EJB client](./generating-ejb-client.html).
+You can read more in the [Generating the EJB client](./generating-ejb-client.html) example.

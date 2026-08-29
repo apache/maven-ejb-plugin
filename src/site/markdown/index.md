@@ -27,25 +27,33 @@ under the License.
 -->
 
 # Apache Maven EJB Plugin
-This plugin generates Java Enterprise JavaBean (EJB) file as well as the associated client jar.
+This plugin generates the Java Enterprise JavaBean (EJB) JAR and the associated ejb-client JAR.
 
 ## Goals Overview
 
-[ejb:ejb](./ejb-mojo.html) - used by Maven for projects with `ejb` package type.
+Maven uses the [ejb:ejb](./ejb-mojo.html) goal for projects with the `ejb` package type.
 
 ## Usage
 
-General instructions on how to use the EJB Plugin can be found on the [usage page](./usage.html). Some more specific use cases are described in the examples given below.
+You can find the general usage instructions on the [usage page](./usage.html). The examples below describe more specific use cases.
 
-In case you still have questions regarding the plugin's usage, please have a look at the [FAQ](./faq.html) and feel free to contact the [user mailing list](./mailing-lists.html). The posts to the mailing list are archived and could already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching the [mail archive](./mailing-lists.html).
+If you have questions about the plugin, read the [FAQ](./faq.html) or contact the [user mailing list](./mailing-lists.html).
 
-If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our [issue tracker](./issue-management.html). When creating a new issue, please provide a comprehensive description of your concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason, entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated. Of course, patches are welcome, too. Contributors can check out the project from our [source repository](./scm.html) and will find supplementary information in the [guide to helping with Maven](/guides/development/guide-helping.html).
+The mailing list archives can contain an answer from an older thread. You can also search the [mail archive](./mailing-lists.html).
 
-Important Note: Starting with version 3.0.0 of the plugin all user properties have been removed which means you can't use a property on the command line anymore to configure maven-ejb-plugin. The configuration of the plugin has be done in the `pom.xml` file instead.
+If the plugin lacks a feature or has a defect, create a feature request or a bug report. Submit the request in the [issue tracker](./issue-management.html).
+
+When you create a new issue, describe the problem completely. Attach complete debug logs, POMs, or small demo projects to the issue.
+
+The developers must reproduce the problem to fix the bug. Patches are welcome.
+
+Contributors can check out the project from the [source repository](./scm.html). They will find more information in the [guide to helping with Maven](/guides/development/guide-helping.html).
+
+**Important Note:** Version 3.0.0 removed all user properties. You cannot use a property on the command line to configure maven-ejb-plugin. You must configure the plugin in the `pom.xml` file instead.
 
 ## Examples
 
-To provide you with better understanding on some usages of the Maven EJB Plugin, you can take a look into the following examples:
+To understand some usages of the Maven EJB Plugin, read the following examples:
 
 - [Filter the deployment descriptor](./examples/filter-deployment-descriptor.html)
 - [Generating an EJB client](./examples/generating-ejb-client.html)
