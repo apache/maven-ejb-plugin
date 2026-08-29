@@ -35,7 +35,7 @@ Maven uses the [ejb:ejb](./ejb-mojo.html) goal for projects with the `ejb` packa
 
 ## Usage
 
-You can find the general usage instructions on the [usage page](./usage.html). The examples below describe more specific use cases.
+You can find general usage instructions on the [usage page](./usage.html). The examples below describe more specific use cases.
 
 If you have questions about the plugin, read the [FAQ](./faq.html) or contact the [user mailing list](./mailing-lists.html).
 
