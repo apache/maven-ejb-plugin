@@ -516,6 +516,23 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         EjbMojo.validateEjbVersion("4.0");
     }
 
+    public void testExecuteFailsWhenSourceDirectoryCannotBeCreated() throws Exception {
+        final MavenProjectResourcesStub project = createTestProject("mkdir-fail");
+        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+
+        File blocker = File.createTempFile("ejb-mkdir-blocker", ".tmp");
+        blocker.deleteOnExit();
+        File source = new File(blocker, "classes");
+        setVariableValueToObject(mojo, "sourceDirectory", source);
+
+        try {
+            mojo.execute();
+            fail("MojoExecutionException is expected when the source directory cannot be created");
+        } catch (MojoExecutionException e) {
+            assertTrue(e.getMessage().contains("Could not create source directory"));
+        }
+    }
+
     protected EjbMojo lookupMojo() throws Exception {
         File pomFile = new File(getBasedir(), DEFAULT_POM_PATH);
         EjbMojo mojo = (EjbMojo) lookupMojo("ejb", pomFile);
