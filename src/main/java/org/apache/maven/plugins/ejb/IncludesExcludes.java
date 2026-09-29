@@ -59,7 +59,7 @@ public class IncludesExcludes {
 
     private List<String> makeNonNullList(List<String> in) {
         if (in == null) {
-            return Collections.<String>emptyList();
+            return Collections.emptyList();
         } else {
             return in;
         }
