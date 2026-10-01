@@ -24,17 +24,28 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.jar.JarFile;
 
+import org.apache.maven.api.plugin.testing.Basedir;
+import org.apache.maven.api.plugin.testing.InjectMojo;
+import org.apache.maven.api.plugin.testing.MojoTest;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
 import org.apache.maven.plugins.ejb.utils.JarContentChecker;
 import org.apache.maven.project.MavenProject;
+import org.junit.jupiter.api.Test;
+
+import static org.apache.maven.api.plugin.testing.MojoExtension.setVariableValueToObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * EJB plugin Test Case
  */
-public class EjbMojoTest extends AbstractMojoTestCase {
-    static final String DEFAULT_POM_PATH = "target/test-classes/unit/ejbmojotest/plugin-config.xml";
+@MojoTest
+@Basedir("/unit/ejbmojotest")
+class EjbMojoTest {
 
     static final String DEFAULT_JAR_NAME = "testJar";
 
@@ -43,9 +54,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testTestEnvironment() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testTestEnvironment(EjbMojo mojo) throws Exception {
         // Perform lookup on the Mojo to make sure everything is ok
-        lookupMojo();
+        assertNotNull(mojo);
     }
 
     /**
@@ -53,9 +66,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testDefaultWithoutClientJar() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testDefaultWithoutClientJar(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("default-noclient");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         setupDefaultProject(project);
 
@@ -72,9 +87,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClassifiedJarWithoutClientJar() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClassifiedJarWithoutClientJar(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("classified-noclient");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         setupDefaultProject(project);
 
@@ -92,9 +109,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testDefaultWithClientJar() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testDefaultWithClientJar(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("default-client");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         setupDefaultProject(project);
 
@@ -111,9 +130,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClassifiedJarWithClientJar() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClassifiedJarWithClientJar(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("classified-client");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         setupDefaultProject(project);
 
@@ -132,10 +153,12 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testDefaultInclusionsExclusions() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testDefaultInclusionsExclusions(EjbMojo mojo) throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("includes-excludes-default");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -174,10 +197,12 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClientJarDefaultInclusionsExclusions() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClientJarDefaultInclusionsExclusions(EjbMojo mojo) throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("includes-excludes-client");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -219,12 +244,14 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClientJarInclusions() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClientJarInclusions(EjbMojo mojo) throws Exception {
         final List<String> inclusions = new LinkedList<>();
         inclusions.add("**/*Include.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-includes");
-        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<>(), null);
+        lookupMojoWithSettings(mojo, project, inclusions, new LinkedList<>(), null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -259,13 +286,15 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClientJarExclusions() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClientJarExclusions(EjbMojo mojo) throws Exception {
 
         final List<String> exclusions = new LinkedList<>();
         exclusions.add("**/*Exclude.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-excludes");
-        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), exclusions, null);
+        lookupMojoWithSettings(mojo, project, new LinkedList<>(), exclusions, null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -300,12 +329,14 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testMainJarExclusions() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testMainJarExclusions(EjbMojo mojo) throws Exception {
         final List<String> exclusions = new LinkedList<>();
         exclusions.add("**/*Exclude.class");
 
         final MavenProjectResourcesStub project = createTestProject("main-excludes");
-        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), new LinkedList<>(), exclusions);
+        lookupMojoWithSettings(mojo, project, new LinkedList<>(), new LinkedList<>(), exclusions);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -340,13 +371,15 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClientJarInclusionsWithSubPackage() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClientJarInclusionsWithSubPackage(EjbMojo mojo) throws Exception {
         final List<String> inclusions = new LinkedList<>();
         inclusions.add("org/sample/ejb/*.class");
 
         final MavenProjectResourcesStub project = createTestProject("client-includes-subpackage");
 
-        final EjbMojo mojo = lookupMojoWithSettings(project, inclusions, new LinkedList<>(), null);
+        lookupMojoWithSettings(mojo, project, inclusions, new LinkedList<>(), null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -381,13 +414,15 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testClientJarExclusionsWithEmptyPackage() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testClientJarExclusionsWithEmptyPackage(EjbMojo mojo) throws Exception {
 
         final LinkedList<String> exclusions = new LinkedList<>();
         exclusions.add("org/sample/ejb/**");
 
         final MavenProjectResourcesStub project = createTestProject("client-excludes-emptypackage");
-        final EjbMojo mojo = lookupMojoWithSettings(project, new LinkedList<>(), exclusions, null);
+        lookupMojoWithSettings(mojo, project, new LinkedList<>(), exclusions, null);
 
         // put this on the target output dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -425,9 +460,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testEjbComplianceVersionTwoDotOneWithoutDescriptor() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testEjbComplianceVersionTwoDotOneWithoutDescriptor(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-2.1");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         // put this on the root dir
         project.addFile("pom.xml", MavenProjectResourcesStub.ROOT_FILE);
@@ -438,12 +475,10 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         setVariableValueToObject(mojo, "generateClient", Boolean.FALSE);
         setVariableValueToObject(mojo, "ejbVersion", "2.1");
 
-        try {
-            mojo.execute();
-            fail("Exception should be thrown: No deployment descriptor present.");
-        } catch (MojoExecutionException e) {
-            // OK
-        }
+        assertThrows(
+                MojoExecutionException.class,
+                mojo::execute,
+                "Exception should be thrown: No deployment descriptor present.");
     }
 
     /**
@@ -451,10 +486,12 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testEjbComplianceVersionThreeWithDescriptor() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testEjbComplianceVersionThreeWithDescriptor(EjbMojo mojo) throws Exception {
 
         final MavenProjectResourcesStub project = createTestProject("compliance-descriptor-3");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         // put this on the target dir
         project.addFile("META-INF/ejb-jar.xml", MavenProjectResourcesStub.OUTPUT_FILE);
@@ -478,9 +515,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
      *
      * @throws Exception if any exception occurs
      */
-    public void testEjbCompliance30WithoutDescriptor() throws Exception {
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testEjbCompliance30WithoutDescriptor(EjbMojo mojo) throws Exception {
         final MavenProjectResourcesStub project = createTestProject("compliance-nodescriptor-3");
-        final EjbMojo mojo = lookupMojoWithDefaultSettings(project);
+        lookupMojoWithDefaultSettings(mojo, project);
 
         // put this on the root dir
         project.addFile("pom.xml", MavenProjectResourcesStub.ROOT_FILE);
@@ -496,33 +535,25 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         assertJarCreation(project, true, false);
     }
 
-    public void testEjb1VersionValidation() {
-        try {
-            EjbMojo.validateEjbVersion("1.1");
-            fail("MojoException is expected");
-        } catch (MojoExecutionException mex) {
-        }
+    @Test
+    void testEjb1VersionValidation() {
+        assertThrows(
+                MojoExecutionException.class, () -> EjbMojo.validateEjbVersion("1.1"), "MojoException is expected");
     }
 
-    public void testEjb2VersionValidation() throws MojoExecutionException {
+    @Test
+    void testEjb2VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("2.1");
     }
 
-    public void testEjb3VersionValidation() throws MojoExecutionException {
+    @Test
+    void testEjb3VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("3.2");
     }
 
-    public void testEjb4VersionValidation() throws MojoExecutionException {
+    @Test
+    void testEjb4VersionValidation() throws MojoExecutionException {
         EjbMojo.validateEjbVersion("4.0");
-    }
-
-    protected EjbMojo lookupMojo() throws Exception {
-        File pomFile = new File(getBasedir(), DEFAULT_POM_PATH);
-        EjbMojo mojo = (EjbMojo) lookupMojo("ejb", pomFile);
-
-        assertNotNull(mojo);
-
-        return mojo;
     }
 
     protected MavenProjectResourcesStub createTestProject(final String testName) throws Exception {
@@ -541,9 +572,12 @@ public class EjbMojoTest extends AbstractMojoTestCase {
     }
 
     protected EjbMojo lookupMojoWithSettings(
-            final MavenProject project, List<String> clientIncludes, List<String> clientExcludes, List<String> excludes)
+            final EjbMojo mojo,
+            final MavenProject project,
+            List<String> clientIncludes,
+            List<String> clientExcludes,
+            List<String> excludes)
             throws Exception {
-        final EjbMojo mojo = lookupMojo();
         setVariableValueToObject(mojo, "project", project);
         setVariableValueToObject(
                 mojo, "outputDirectory", new File(project.getBuild().getDirectory()));
@@ -559,8 +593,8 @@ public class EjbMojoTest extends AbstractMojoTestCase {
         return mojo;
     }
 
-    protected EjbMojo lookupMojoWithDefaultSettings(final MavenProject project) throws Exception {
-        return lookupMojoWithSettings(project, new LinkedList<>(), new LinkedList<>(), null);
+    protected EjbMojo lookupMojoWithDefaultSettings(final EjbMojo mojo, final MavenProject project) throws Exception {
+        return lookupMojoWithSettings(mojo, project, new LinkedList<>(), new LinkedList<>(), null);
     }
 
     protected void assertJarCreation(
@@ -577,11 +611,11 @@ public class EjbMojoTest extends AbstractMojoTestCase {
                     project.getBuild().getDirectory() + "/" + DEFAULT_JAR_NAME + "-" + classifier + "-client.jar";
         }
 
-        assertEquals("Invalid value for ejb-jar creation", ejbJarCreated, new File(checkedJarFile).exists());
+        assertEquals(ejbJarCreated, new File(checkedJarFile).exists(), "Invalid value for ejb-jar creation");
         assertEquals(
-                "Invalid value for ejb-jar client creation",
                 ejbClientJarCreated,
-                new File(checkedClientJarFile).exists());
+                new File(checkedClientJarFile).exists(),
+                "Invalid value for ejb-jar client creation");
     }
 
     protected void assertJarCreation(final MavenProject project, boolean ejbJarCreated, boolean ejbClientJarCreated) {
