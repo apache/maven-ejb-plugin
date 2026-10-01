@@ -22,6 +22,8 @@ import javax.inject.Inject;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +49,6 @@ import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.ManifestException;
 import org.codehaus.plexus.archiver.util.DefaultFileSet;
-import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Build an EJB (and optional client) from the current project.
@@ -450,7 +451,11 @@ public class EjbMojo extends AbstractMojo {
 
         // Create a temporary file that we can copy-and-filter
         File unfilteredDeploymentDescriptor = new File(sourceDirectory, ejbJar + ".unfiltered");
-        FileUtils.copyFile(deploymentDescriptor, unfilteredDeploymentDescriptor);
+        Files.copy(
+                deploymentDescriptor.toPath(),
+                unfilteredDeploymentDescriptor.toPath(),
+                StandardCopyOption.REPLACE_EXISTING,
+                StandardCopyOption.COPY_ATTRIBUTES);
         mavenFileFilter.copyFile(
                 unfilteredDeploymentDescriptor,
                 deploymentDescriptor,
@@ -458,7 +463,7 @@ public class EjbMojo extends AbstractMojo {
                 filterWrappers,
                 getEncoding(unfilteredDeploymentDescriptor));
         // Remove the temporary file
-        FileUtils.forceDelete(unfilteredDeploymentDescriptor);
+        Files.deleteIfExists(unfilteredDeploymentDescriptor.toPath());
     }
 
     /**
