@@ -28,35 +28,35 @@ under the License.
 
 # Usage
 
-The EJB Plugin is used to package an EJB module. There are two ways to use the EJB Plugin:
+The EJB Plugin packages an EJB module. You can use the plugin in two ways:
 
-- If the packaging type defined in the `pom.xml` is `ejb`, the `package` lifecycle phase can be used
+- If the `pom.xml` defines the `ejb` packaging type, use the `package` lifecycle phase
 
     ```
     mvn package
     ```
 
-- or using the `ejb:ejb` goal
+- Or use the `ejb:ejb` goal
 
     ```
     mvn ejb:ejb
     ```
 
-To handle archiving this version of Maven EJB Plugin uses [Maven Archiver](/shared/maven-archiver/index.html) ${mavenArchiverVersion}.
+This version of Maven EJB Plugin uses [Maven Archiver](/shared/maven-archiver/index.html) ${mavenArchiverVersion} to create the archive.
 
-To handle filtering this version of Maven EJB Plugin uses [Maven Filtering](/shared/maven-filtering/index.html) ${mavenFilteringVersion}.
+This version of Maven EJB Plugin uses [Maven Filtering](/shared/maven-filtering/index.html) ${mavenFilteringVersion} to filter resources.
 
-The plugin doesn't do any EJB specific processing during the generation of the JAR except for validating the existence of an EJB deployment descriptor if the EJB version is 2.0+, but it provides the following customization:
+The plugin does not perform EJB-specific processing during JAR generation. The plugin checks only that an EJB deployment descriptor exists when the EJB version is 2.0 or newer. It provides these customization options:
 
 - The EJB version to use
 - [Generating and customizing an ejb-client](./examples/generating-ejb-client.html)
 
-    **Note:** The dependencies will not be package with the EJB JAR.
+    **Note:** The plugin will not package the dependencies with the EJB JAR.
 
-Specifying the EJB version to use
----------------------------------
+The EJB version to use
+----------------------
 
-The plugin generates according to the EJB version specified by the [`ejbVersion`](./ejb-mojo.html#ejbVersion) parameter. To use some other version than the default, configure the plugin as in the example below:
+The plugin uses the EJB version from the [`ejbVersion`](./ejb-mojo.html#ejbVersion) parameter. To use a version other than the default, configure the plugin as shown below:
 
 ```xml
   <build>
