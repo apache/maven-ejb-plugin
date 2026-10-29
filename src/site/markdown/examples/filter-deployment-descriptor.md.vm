@@ -26,11 +26,11 @@ under the License.
 
 # Filter the deployment descriptor
 
-The EJB Plugin is capable of filtering the deployment descriptor (`/META-INF/ejb-jar.xml`) for you, if you have the need to inject values into it during the build.
+The EJB Plugin can filter the deployment descriptor (`/META-INF/ejb-jar.xml`) when you need to inject values into it during the build.
 
-**Note:** This feature was added in version 2.3 of the EJB Plugin.
+**Note:** Version 2.3 of the EJB Plugin added this feature.
 
-To filter the deployment descriptor add the following configuration to your POM:
+To filter the deployment descriptor, add the following configuration to your POM:
 
 ```xml
 <project>
@@ -51,4 +51,4 @@ To filter the deployment descriptor add the following configuration to your POM:
 </project>
 ```
 
-You can read more about filtering in the [Getting Started Guide](/guides/getting-started/index.html#How_do_I_filter_resource_files).
+You can read more about how to filter resources in the [Getting Started Guide](/guides/getting-started/index.html#How_do_I_filter_resource_files).
