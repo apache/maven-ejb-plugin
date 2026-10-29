@@ -35,7 +35,7 @@ under the License.
   <description>Generates a Java Enterprise JavaBean (EJB) file as well as the associated client JAR.</description>
 
   <prerequisites>
-    <maven>3.6.3</maven>
+    <maven>3.9.0</maven>
   </prerequisites>
 
   <scm>
