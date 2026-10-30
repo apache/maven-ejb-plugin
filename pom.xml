@@ -60,7 +60,6 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <javaVersion>8</javaVersion>
     <mavenVersion>3.9.16</mavenVersion>
     <project.build.outputTimestamp>2025-11-16T13:25:49Z</project.build.outputTimestamp>
     <!-- mavenArchiverVersion is also used by site -->
@@ -166,7 +165,6 @@ under the License.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.11.0</version>
         <executions>
           <execution>
             <id>analyze</id>
