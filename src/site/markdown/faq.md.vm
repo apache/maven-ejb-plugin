@@ -33,7 +33,7 @@ Frequently Asked Questions
 
 #[[### How can I specify a Class-Path: entry in the manifest of an EJB JAR?]]#
 
-You just have to configure it:
+Configure the manifest as shown below:
 
 ```xml
 <project>
@@ -60,13 +60,10 @@ You just have to configure it:
 </project>
 ```
 
-Please see the [Maven Archiver Reference](/shared/maven-archiver/examples/classpath.html)
-for more information about controlling the exact format of the generated class path
-entries.
+See the [Maven Archiver Reference](/shared/maven-archiver/examples/classpath.html) for more information about the exact format of the generated class path entries.
 
 <a id="classifieruse"></a>
 
 #[[### How does the classifier affect artifacts in my EJB project?]]#
 
-When used, the copy of the artifact in your project will have the classifier appended
-to its filename. This can be used to differentiate multiple artifacts.
+When you use a classifier, the plugin appends it to the artifact filename. You can use the classifier to differentiate multiple artifacts.
