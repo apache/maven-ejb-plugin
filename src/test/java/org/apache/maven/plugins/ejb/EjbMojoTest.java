@@ -542,17 +542,17 @@ class EjbMojoTest {
     }
 
     @Test
-    void testEjb2VersionValidation() throws MojoExecutionException {
+    void testEjb2VersionValidation() throws Exception {
         EjbMojo.validateEjbVersion("2.1");
     }
 
     @Test
-    void testEjb3VersionValidation() throws MojoExecutionException {
+    void testEjb3VersionValidation() throws Exception {
         EjbMojo.validateEjbVersion("3.2");
     }
 
     @Test
-    void testEjb4VersionValidation() throws MojoExecutionException {
+    void testEjb4VersionValidation() throws Exception {
         EjbMojo.validateEjbVersion("4.0");
     }
 
