@@ -71,18 +71,22 @@ public class MavenProjectBasicStub extends MavenProject {
         initializeParentFields();
     }
 
+    @Override
     public String getName() {
         return "Test Project " + identifier;
     }
 
+    @Override
     public void setDescription(String desc) {
         description = desc;
     }
 
+    @Override
     public Model getModel() {
         return model;
     }
 
+    @Override
     public String getDescription() {
         if (description == null) {
             return "this is a test project";
@@ -91,16 +95,19 @@ public class MavenProjectBasicStub extends MavenProject {
         }
     }
 
+    @Override
     public File getBasedir() {
         // create an isolated environment
         // see setupTestEnvironment for details
         return new File(testRootDir);
     }
 
+    @Override
     public Artifact getArtifact() {
         return artifact;
     }
 
+    @Override
     public String getGroupId() {
         String groupId = getModel().getGroupId();
         if ((groupId == null) && (getModel().getParent() != null)) {
@@ -109,14 +116,17 @@ public class MavenProjectBasicStub extends MavenProject {
         return groupId;
     }
 
+    @Override
     public String getArtifactId() {
         return getModel().getArtifactId();
     }
 
+    @Override
     public String getPackaging() {
         return "ejb";
     }
 
+    @Override
     public String getVersion() {
         return identifier;
     }
@@ -125,6 +135,7 @@ public class MavenProjectBasicStub extends MavenProject {
         properties.put(key, value);
     }
 
+    @Override
     public Properties getProperties() {
         return properties;
     }
