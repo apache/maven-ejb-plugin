@@ -284,6 +284,7 @@ public class EjbMojo extends AbstractMojo {
     /**
      * Generates an EJB jar and optionally an ejb-client jar.
      */
+    @Override
     public void execute() throws MojoExecutionException {
 
         if (!sourceDirectory.exists()) {

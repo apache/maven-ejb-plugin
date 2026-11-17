@@ -130,6 +130,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         return testResourcesDirectory;
     }
 
+    @Override
     public Build getBuild() {
         return build;
     }
