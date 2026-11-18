@@ -21,13 +21,14 @@ package org.apache.maven.plugins.ejb.stub;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.maven.model.Build;
-import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Stub
@@ -172,11 +173,11 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
 
         // setup src dir
         if (!new File(resourcesDirectory).exists()) {
-            FileUtils.mkdir(resourcesDirectory);
+            Files.createDirectories(Paths.get(resourcesDirectory));
         }
 
         if (!new File(testResourcesDirectory).exists()) {
-            FileUtils.mkdir(testResourcesDirectory);
+            Files.createDirectories(Paths.get(testResourcesDirectory));
         }
 
         createDirectories(resourcesDirectory, testResourcesDirectory);
@@ -185,11 +186,11 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
 
         // setup target dir
         if (!new File(outputDirectory).exists()) {
-            FileUtils.mkdir(outputDirectory);
+            Files.createDirectories(Paths.get(outputDirectory));
         }
 
         if (!new File(testOutputDirectory).exists()) {
-            FileUtils.mkdir(testOutputDirectory);
+            Files.createDirectories(Paths.get(testOutputDirectory));
         }
 
         setupTargetFiles();
