@@ -19,6 +19,8 @@
 package org.apache.maven.plugins.ejb.stub;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -29,7 +31,6 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.testing.PlexusExtension;
-import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Stub
@@ -63,7 +64,7 @@ public class MavenProjectBasicStub extends MavenProject {
         testRootDir = PlexusExtension.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
 
         if (!new File(testRootDir).exists()) {
-            FileUtils.mkdir(testRootDir);
+            Files.createDirectories(Paths.get(testRootDir));
         }
 
         // this is ugly but needed to ensure that the copy constructor
