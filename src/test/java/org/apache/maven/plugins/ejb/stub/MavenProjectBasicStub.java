@@ -19,6 +19,8 @@
 package org.apache.maven.plugins.ejb.stub;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -26,8 +28,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.model.Model;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.PlexusTestCase;
-import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.testing.PlexusExtension;
 
 /**
  * Stub
@@ -56,10 +57,10 @@ public class MavenProjectBasicStub extends MavenProject {
         artifact = new DefaultArtifact(getGroupId(), getArtifactId(), getVersion(), "compile", "jar", "", null);
 
         // set isolated root directory
-        testRootDir = PlexusTestCase.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
+        testRootDir = PlexusExtension.getBasedir() + "/target/test-classes/unit/test-dir/" + identifier;
 
         if (!new File(testRootDir).exists()) {
-            FileUtils.mkdir(testRootDir);
+            Files.createDirectories(Paths.get(testRootDir));
         }
 
         // this is ugly but needed to ensure that the copy constructor
@@ -67,18 +68,22 @@ public class MavenProjectBasicStub extends MavenProject {
         initializeParentFields();
     }
 
+    @Override
     public String getName() {
         return "Test Project " + identifier;
     }
 
+    @Override
     public void setDescription(String desc) {
         description = desc;
     }
 
+    @Override
     public Model getModel() {
         return model;
     }
 
+    @Override
     public String getDescription() {
         if (description == null) {
             return "this is a test project";
@@ -87,16 +92,19 @@ public class MavenProjectBasicStub extends MavenProject {
         }
     }
 
+    @Override
     public File getBasedir() {
         // create an isolated environment
         // see setupTestEnvironment for details
         return new File(testRootDir);
     }
 
+    @Override
     public Artifact getArtifact() {
         return artifact;
     }
 
+    @Override
     public String getGroupId() {
         String groupId = getModel().getGroupId();
         if ((groupId == null) && (getModel().getParent() != null)) {
@@ -105,14 +113,26 @@ public class MavenProjectBasicStub extends MavenProject {
         return groupId;
     }
 
+    @Override
     public String getArtifactId() {
         return getModel().getArtifactId();
     }
 
+    @Override
+    public String getPackaging() {
+        return "ejb";
+    }
+
+    @Override
     public String getVersion() {
         return identifier;
     }
 
+    public void addProperty(String key, String value) {
+        properties.put(key, value);
+    }
+
+    @Override
     public Properties getProperties() {
         return properties;
     }

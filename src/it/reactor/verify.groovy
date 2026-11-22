@@ -31,10 +31,10 @@ if ( !jarFile.isFile() )
 
 JarFile jar = new JarFile( jarFile );
 
-String[] includedEntries = {
+String[] includedEntries = [
     "META-INF/ejb-jar.xml",
     "org/apache/maven/Person.class",
-};
+];
 for ( String included : includedEntries )
 {
     System.out.println( "Checking for existence of " + included );
