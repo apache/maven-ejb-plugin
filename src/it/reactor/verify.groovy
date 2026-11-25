@@ -17,17 +17,11 @@
  * under the License.
  */
 
-import java.io.*;
-import java.util.*;
 import java.util.jar.*;
-import java.util.regex.*;
 
 File jarFile = new File( basedir, "sub/target/sub-1.0.jar" );
 System.out.println( "Checking for existence of " + jarFile );
-if ( !jarFile.isFile() )
-{
-    throw new Exception( "Missing " + jarFile );
-}
+assert jarFile.isFile() : "Missing " + jarFile;
 
 JarFile jar = new JarFile( jarFile );
 
