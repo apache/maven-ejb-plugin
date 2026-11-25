@@ -17,19 +17,19 @@
  * under the License.
  */
 
-import java.util.jar.*;
+import java.util.jar.*
 
-File jarFile = new File( basedir, "target/test-1.0.jar" );
-System.out.println( "Checking for existence of " + jarFile );
-assert jarFile.isFile() : "Missing " + jarFile;
+File jarFile = new File(basedir, "target/test-1.0.jar")
+System.out.println("Checking for existence of " + jarFile)
+assert jarFile.isFile() : "Missing " + jarFile
 
-JarFile jar = new JarFile( jarFile );
+JarFile jar = new JarFile( jarFile )
 
-Attributes manifest = jar.getManifest().getMainAttributes();
+Attributes manifest = jar.getManifest().getMainAttributes()
 
-assert manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Maven EJB Plugin" ) : "Created-By not equals Maven EJB Plugin";
+assert manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Maven EJB Plugin" ) : "Created-By not equals Maven EJB Plugin"
 
-String classpath = manifest.getValue( Attributes.Name.CLASS_PATH );
-assert classpath != null && classpath.indexOf( "junit-3.8.2.jar" ) >= 0 : "Bad Class-Path " + classpath;
+String classpath = manifest.getValue( Attributes.Name.CLASS_PATH )
+assert classpath != null && classpath.indexOf( "junit-3.8.2.jar" ) >= 0 : "Bad Class-Path " + classpath
 
-jar.close();
+jar.close()

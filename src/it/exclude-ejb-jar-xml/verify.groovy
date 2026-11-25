@@ -17,29 +17,26 @@
  * under the License.
  */
 
-import java.util.zip.*;
+import java.util.zip.*
 
-File jarFile = new File( basedir, "target/test-1.0.jar" );
-System.out.println( "Checking for existence of " + jarFile );
-assert jarFile.isFile() : "Missing " + jarFile;
+File jarFile = new File(basedir, "target/test-1.0.jar")
+System.out.println("Checking for existence of " + jarFile)
+assert jarFile.isFile() : "Missing " + jarFile
 
-ZipInputStream zis = new ZipInputStream( new FileInputStream( jarFile ) );
+ZipInputStream zis = new ZipInputStream( new FileInputStream( jarFile ) )
 
-int count = 0;
+int count = 0
 
-while (true)
-{
-    ZipEntry entry = zis.getNextEntry();
-    if ( entry == null )
-    {
-        break;
+while (true) {
+    ZipEntry entry = zis.getNextEntry()
+    if ( entry == null ) {
+        break
     }
-    if ( entry.getName().equals( "META-INF/ejb-jar.xml" ) )
-    {
-        count++;
+    if ( entry.getName().equals( "META-INF/ejb-jar.xml" ) ) {
+        count++
     }
 }
 
-zis.close();
+zis.close()
 
-assert count == 1 : "Wrong number of ejb-jar.xml's in archive: " + count;
+assert count == 1 : "Wrong number of ejb-jar.xml's in archive: " + count
