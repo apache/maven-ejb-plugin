@@ -17,24 +17,20 @@
  * under the License.
  */
 
-import java.util.jar.*;
+import java.util.jar.*
 
-File jarFile = new File( basedir, "target/maven-it-it0017-1.0.jar" );
-System.out.println( "Checking for existence of " + jarFile );
-assert jarFile.isFile();
+File jarFile = new File(basedir, "target/maven-it-it0017-1.0.jar")
+System.out.println("Checking for existence of " + jarFile)
+assert jarFile.isFile()
 
-JarFile jar = new JarFile( jarFile );
+JarFile jar = new JarFile(jarFile)
 
-String[] includedEntries = [
-    "META-INF/ejb-jar.xml",
-    "org/apache/maven/it0017/Person.class",
-];
-for ( String included : includedEntries )
-{
-    System.out.println( "Checking for existence of " + included );
-    assert jar.getEntry( included ) != null : "Missing " + included;
+String[] includedEntries = ["META-INF/ejb-jar.xml", "org/apache/maven/it0017/Person.class",]
+for (String included : includedEntries) {
+    System.out.println("Checking for existence of " + included)
+    assert jar.getEntry(included) != null : "Missing " + included
 }
 
-jar.close();
+jar.close()
 
-return true;
+return true

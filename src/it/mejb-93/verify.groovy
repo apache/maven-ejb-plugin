@@ -34,22 +34,22 @@ def getProjectVersion() {
         item.groupId.equals("org.apache.maven.plugins") && item.artifactId.equals("maven-ejb-plugin")
     }
 
-    return mavenejb.version;
+    return mavenejb.version
 }
 
-def projectVersion = getProjectVersion();
+def projectVersion = getProjectVersion()
 
 println "ProjectVersion:" + projectVersion
 
 
-def jarFile = new File( basedir, "target/maven-it-mejb93-1.0.jar" )
+def jarFile = new File(basedir, "target/maven-it-mejb93-1.0.jar")
 assert jarFile.isFile()
 
-def buildLog = new File( basedir, "build.log" ).getText('UTF-8')
+def buildLog = new File(basedir, "build.log").getText('UTF-8')
 
-assert buildLog.contains ('' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---') : "default executions did not happen."
+assert buildLog.contains('' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---') : "default executions did not happen."
 assert buildLog.contains ('' + projectVersion + ':ejb (second-execution) @ maven-it-mejb93 ---') : "second executions did not happen."
 assert buildLog.contains ('[ERROR] Failed to execute goal org.apache.maven.plugins:maven-ejb-plugin:' + projectVersion
-    + ':ejb (second-execution) on project maven-it-mejb93: '
-    + 'You have to use a classifier to attach supplemental artifacts to the '
-    + 'project instead of replacing them. -> [Help 1]') : "exception message does not exists or the expected content does not exist."
++ ':ejb (second-execution) on project maven-it-mejb93: '
++ 'You have to use a classifier to attach supplemental artifacts to the '
++ 'project instead of replacing them. -> [Help 1]') : "exception message does not exists or the expected content does not exist."
