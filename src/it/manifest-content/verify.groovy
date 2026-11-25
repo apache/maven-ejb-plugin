@@ -17,31 +17,19 @@
  * under the License.
  */
 
-import java.io.*;
-import java.util.*;
 import java.util.jar.*;
-import java.util.regex.*;
 
 File jarFile = new File( basedir, "target/test-1.0.jar" );
 System.out.println( "Checking for existence of " + jarFile );
-if ( !jarFile.isFile() )
-{
-    throw new FileNotFoundException( "Missing " + jarFile );
-}
+assert jarFile.isFile() : "Missing " + jarFile;
 
 JarFile jar = new JarFile( jarFile );
 
 Attributes manifest = jar.getManifest().getMainAttributes();
 
-if ( !manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Maven EJB Plugin" ) )
-{
-    throw new IllegalStateException( "Created-By not equals Maven EJB Plugin" );
-}
+assert manifest.getValue( new Attributes.Name( "Created-By" ) ).startsWith( "Maven EJB Plugin" ) : "Created-By not equals Maven EJB Plugin";
 
 String classpath = manifest.getValue( Attributes.Name.CLASS_PATH );
-if ( classpath == null || classpath.indexOf( "junit-3.8.2.jar" ) < 0 )
-{
-    throw new IllegalStateException( "Bad Class-Path " + classpath );
-}
+assert classpath != null && classpath.indexOf( "junit-3.8.2.jar" ) >= 0 : "Bad Class-Path " + classpath;
 
 jar.close();

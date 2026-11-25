@@ -17,8 +17,6 @@
  * under the License.
  */
 
-import java.io.*
-import java.util.*
 import groovy.xml.XmlSlurper
 
 /**
@@ -45,28 +43,13 @@ println "ProjectVersion:" + projectVersion
 
 
 def jarFile = new File( basedir, "target/maven-it-mejb93-1.0.jar" )
-if ( !jarFile.isFile() )
-{
-    println ( "FAILURE!" )
-    return false
-}
+assert jarFile.isFile()
 
 def buildLog = new File( basedir, "build.log" ).getText('UTF-8')
 
-if (!buildLog.contains ('' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---')) {
-  println ( "default executions did not happen.")
-  return false
-}
-if (!buildLog.contains ('' + projectVersion + ':ejb (second-execution) @ maven-it-mejb93 ---')) {
-  println ( "second executions did not happen.")
-  return false
-}
-if (!buildLog.contains ('[ERROR] Failed to execute goal org.apache.maven.plugins:maven-ejb-plugin:' + projectVersion
+assert buildLog.contains ('' + projectVersion + ':ejb (default-ejb) @ maven-it-mejb93 ---') : "default executions did not happen."
+assert buildLog.contains ('' + projectVersion + ':ejb (second-execution) @ maven-it-mejb93 ---') : "second executions did not happen."
+assert buildLog.contains ('[ERROR] Failed to execute goal org.apache.maven.plugins:maven-ejb-plugin:' + projectVersion
     + ':ejb (second-execution) on project maven-it-mejb93: '
     + 'You have to use a classifier to attach supplemental artifacts to the '
-    + 'project instead of replacing them. -> [Help 1]')) {
-  println ( "exception message does not exists or the expected content does not exist.")
-  return false
-}
-
-return true;
+    + 'project instead of replacing them. -> [Help 1]') : "exception message does not exists or the expected content does not exist."

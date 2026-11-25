@@ -17,17 +17,11 @@
  * under the License.
  */
 
-import java.io.*;
-import java.util.*;
 import java.util.zip.*;
-import java.util.regex.*;
 
 File jarFile = new File( basedir, "target/test-1.0.jar" );
 System.out.println( "Checking for existence of " + jarFile );
-if ( !jarFile.isFile() )
-{
-    throw new FileNotFoundException( "Missing " + jarFile );
-}
+assert jarFile.isFile() : "Missing " + jarFile;
 
 ZipInputStream zis = new ZipInputStream( new FileInputStream( jarFile ) );
 
@@ -48,9 +42,4 @@ while (true)
 
 zis.close();
 
-if ( count != 1 )
-{
-    throw new IllegalStateException( "Wrong number of ejb-jar.xml's in archive: " + count );
-}
-
-return true;
+assert count == 1 : "Wrong number of ejb-jar.xml's in archive: " + count;
