@@ -20,6 +20,8 @@ package org.apache.maven.plugins.ejb;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -32,6 +34,7 @@ import org.apache.maven.plugins.ejb.stub.MavenProjectResourcesStub;
 import org.apache.maven.plugins.ejb.utils.JarContentChecker;
 import org.apache.maven.project.MavenProject;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static org.apache.maven.api.plugin.testing.MojoExtension.setVariableValueToObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,6 +49,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @MojoTest
 @Basedir("/unit/ejbmojotest")
 class EjbMojoTest {
+
+    @TempDir
+    Path tempDir;
 
     static final String DEFAULT_JAR_NAME = "testJar";
 
@@ -554,6 +560,20 @@ class EjbMojoTest {
     @Test
     void testEjb4VersionValidation() throws Exception {
         EjbMojo.validateEjbVersion("4.0");
+    }
+
+    @Test
+    @InjectMojo(goal = "ejb", pom = "plugin-config.xml")
+    void testExecuteFailsWhenSourceDirectoryCannotBeCreated(EjbMojo mojo) throws Exception {
+        final MavenProjectResourcesStub project = createTestProject("mkdir-fail");
+        lookupMojoWithDefaultSettings(mojo, project);
+
+        File blocker = Files.createFile(tempDir.resolve("blocker")).toFile();
+        File source = new File(blocker, "classes");
+        setVariableValueToObject(mojo, "sourceDirectory", source);
+
+        MojoExecutionException exception = assertThrows(MojoExecutionException.class, mojo::execute);
+        assertEquals("Could not create source directory " + source.getPath(), exception.getMessage());
     }
 
     protected MavenProjectResourcesStub createTestProject(final String testName) throws Exception {
