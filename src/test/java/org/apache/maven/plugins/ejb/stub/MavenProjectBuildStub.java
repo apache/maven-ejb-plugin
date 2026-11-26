@@ -46,8 +46,6 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
 
     protected String srcDirectory;
 
-    protected String targetDirectory;
-
     protected String buildDirectory;
 
     protected String outputDirectory;
@@ -57,10 +55,6 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
     protected String resourcesDirectory;
 
     protected String testResourcesDirectory;
-
-    protected String targetResourceDirectory;
-
-    protected String targetTestResourcesDirectory;
 
     protected List<String> targetClassesList;
 
@@ -89,30 +83,12 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         model.setBuild(build);
     }
 
-    public void addDirectory(String name) {
-        if (isValidPath(name)) {
-            directoryList.add(name);
-        }
-    }
-
-    public void setOutputDirectory(String dir) {
-        outputDirectory = buildDirectory + "/" + dir;
-        build.setOutputDirectory(outputDirectory);
-    }
-
     public void addFile(String name, int type) {
         if (isValidPath(name)) {
             List<String> list = getList(type);
 
             list.add(name);
         }
-    }
-
-    public void addFile(String name, String data, int type) {
-        File fileName = new File(name);
-
-        addFile(name, type);
-        dataMap.put(fileName.getName(), data);
     }
 
     public String getOutputDirectory() {
@@ -137,10 +113,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
     }
 
     /**
-     * returns true if the path is relative and false if absolute also returns false if it is relative to the parent
-     *
-     * @param path
-     * @return
+     * @return true if the path is relative and false if absolute also returns false if it is relative to the parent
      */
     private boolean isValidPath(String path) {
         boolean bRetVal = true;
@@ -259,7 +232,7 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
             if (!currentFile.exists()) {
                 try {
                     currentFile.createNewFile();
-                    populateFile(currentFile, RESOURCES_FILE);
+                    populateFile(currentFile);
                 } catch (IOException io) {
                     // TODO: handle exception
                 }
@@ -280,9 +253,9 @@ public class MavenProjectBuildStub extends MavenProjectBasicStub {
         createFiles(testparent, RESOURCES_FILE);
     }
 
-    private void populateFile(File file, int type) {
+    private void populateFile(File file) {
         FileOutputStream outputStream;
-        String data = (String) dataMap.get(file.getName());
+        String data = dataMap.get(file.getName());
 
         if ((data != null) && file.exists()) {
             try {

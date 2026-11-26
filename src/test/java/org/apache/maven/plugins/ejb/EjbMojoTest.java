@@ -556,6 +556,15 @@ class EjbMojoTest {
         EjbMojo.validateEjbVersion("4.0");
     }
 
+    protected EjbMojo lookupMojo() throws Exception {
+        File pomFile = new File(getBasedir(), DEFAULT_POM_PATH);
+        EjbMojo mojo = lookupMojo("ejb", pomFile);
+
+        assertNotNull(mojo);
+
+        return mojo;
+    }
+
     protected MavenProjectResourcesStub createTestProject(final String testName) throws Exception {
         // this will automatically create the isolated
         // test environment

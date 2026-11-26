@@ -26,9 +26,7 @@ import java.util.Properties;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.DefaultArtifact;
-import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.model.Model;
-import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.testing.PlexusExtension;
 
@@ -45,8 +43,6 @@ public class MavenProjectBasicStub extends MavenProject {
     protected String description;
 
     protected ModelStub model;
-
-    protected File file;
 
     protected DefaultArtifact artifact;
 
@@ -145,13 +141,13 @@ public class MavenProjectBasicStub extends MavenProject {
     private void initializeParentFields() {
         // the pom should be located in the isolated dummy root
         super.setFile(new File(getBasedir(), "pom.xml"));
-        super.setDependencyArtifacts(Collections.<Artifact>emptySet());
-        super.setArtifacts(Collections.<Artifact>emptySet());
-        super.setExtensionArtifacts(Collections.<Artifact>emptySet());
-        super.setRemoteArtifactRepositories(Collections.<ArtifactRepository>emptyList());
-        super.setPluginArtifactRepositories(Collections.<ArtifactRepository>emptyList());
-        super.setCollectedProjects(Collections.<MavenProject>emptyList());
-        super.setActiveProfiles(Collections.<Profile>emptyList());
+        super.setDependencyArtifacts(Collections.emptySet());
+        super.setArtifacts(Collections.emptySet());
+        super.setExtensionArtifacts(Collections.emptySet());
+        super.setRemoteArtifactRepositories(Collections.emptyList());
+        super.setPluginArtifactRepositories(Collections.emptyList());
+        super.setCollectedProjects(Collections.emptyList());
+        super.setActiveProfiles(Collections.emptyList());
         super.setOriginalModel(null);
         super.setExecutionProject(this);
         super.setArtifact(artifact);
